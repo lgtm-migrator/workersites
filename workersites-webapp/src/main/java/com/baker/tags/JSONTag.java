@@ -8,7 +8,11 @@ import javax.servlet.jsp.JspWriter;
 
 public class JSONTag extends RequestContextAwareTag {
 
-    private Object val;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -797155473856809091L;
+	private Object val;
 
     @Override
     protected int doStartTagInternal() throws Exception {
