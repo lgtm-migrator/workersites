@@ -85,6 +85,11 @@
         </repository>
         -->
         <repository>
+		    <id>springsource-repository</id>
+		    <name>Spring Maven Releases, Milestones, and Snapshots</name>
+		    <url>http://repo.springsource.org/snapshot</url>
+		</repository>
+        <repository>
             <id>spring-milestone</id>
             <name>Spring Maven MILESTONE Repository</name>
             <url>http://repo.springsource.org/libs-milestone</url>
