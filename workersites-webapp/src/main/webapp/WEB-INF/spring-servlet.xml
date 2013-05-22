@@ -39,7 +39,7 @@
     </mvc:interceptors>
 
     <bean id="directViewMapping" abstract="true" class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
-    <bean name="/home" parent="directViewMapping" p:viewName="view.home" />
+    <!-- <bean name="/home" parent="directViewMapping" p:viewName="view.home" /> --> 
     <bean name="/about" parent="directViewMapping" p:viewName="view.about" />
     <bean name="/login" parent="directViewMapping" p:viewName="view.login" />
     <bean name="/contact" parent="directViewMapping" p:viewName="view.contact" />
@@ -82,4 +82,6 @@
 
     <bean name="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 
+	<import resource="webflow-application-config.xml" />
+	
 </beans>

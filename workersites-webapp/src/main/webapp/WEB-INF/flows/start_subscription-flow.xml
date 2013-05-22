@@ -5,9 +5,14 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<persistence-context />
-
-	<view-state id="start">
-		
+	
+	<view-state id="start_subscription" view="start_subscription">
+		<transition on="submit" to="subscription_ok" />
+		<transition on="lostpassword" to="recovery_form" />
 	</view-state>
+	
+	<view-state id="subscription_ok" view="subscription_ok" />
 
+	<view-state id="recovery_form" view="recovery_form" />
+	
 </flow>

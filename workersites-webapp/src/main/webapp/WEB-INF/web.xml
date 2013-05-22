@@ -4,12 +4,12 @@
       xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
       version="3.0">
 
-	<display-name>Extra Income</display-name>
+	<display-name>L'immo et nous</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/spring.xml
+            /WEB-INF/spring.xml  <!-- Dans ces fichiers doivent être chargé services métier, avec tous les éléments dont ils dépendent (connexion à la base de données, DAO, etc.).  -->
             /WEB-INF/spring-security.xml
         </param-value>
     </context-param>
@@ -107,7 +107,7 @@
 
     <servlet>
         <servlet-name>spring</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> <!-- Les beans définit plus haut dans le contextConfigLocation sont visible ici. -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/spring-servlet.xml</param-value>
@@ -118,11 +118,6 @@
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    
-	<servlet-mapping>
-        <servlet-name>spring</servlet-name>
-        <url-pattern>/flow/*</url-pattern>
     </servlet-mapping>
     
 	<jsp-config>

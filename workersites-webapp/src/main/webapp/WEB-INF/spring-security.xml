@@ -18,14 +18,20 @@
 
     <http pattern="/error/**" security="none"/>
 
-    <http pattern="/home" security="none"/>
+    <!-- <http pattern="/home" security="none"/> --> 
     <http pattern="/about" security="none"/>
     <http pattern="/contact" security="none"/>
 
     <http pattern="/**" use-expressions="true">
         <intercept-url pattern="/login" access="isAnonymous()" />
+        <intercept-url pattern="/home" access="permitAll" />
+        <intercept-url pattern="/flow/start_subscription" access="permitAll" />
+        
         <intercept-url pattern="/**" access="isAuthenticated()" />
-
+        
+       <!--   <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> -->
+		
         <form-login login-page="/login" authentication-failure-url="/login" default-target-url="/home" />
         <logout logout-url="/logout" logout-success-url="/home" delete-cookies="JSESSIONID" />
 
@@ -38,6 +44,7 @@
         <authentication-provider>
             <user-service>
                 <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>
+                <user name="user" password="user" authorities="ROLE_USER"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>
