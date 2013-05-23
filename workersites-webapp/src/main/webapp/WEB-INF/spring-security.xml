@@ -11,7 +11,7 @@
     <http pattern="/crossdomain.xml" security="none"/>
     <http pattern="/favicon.ico" security="none"/>
     <http pattern="/apple-touch-*.png" security="none"/>
-
+	<http pattern="/flow/**" security="none"/>
     <http pattern="/resources/**" security="none"/>
 
     <http pattern="/resources.json" security="none"/>
@@ -25,7 +25,7 @@
     <http pattern="/**" use-expressions="true">
         <intercept-url pattern="/login" access="isAnonymous()" />
         <intercept-url pattern="/home" access="permitAll" />
-        <intercept-url pattern="/flow/start_subscription" access="permitAll" />
+        <intercept-url pattern="/signup" access="permitAll" />
         
         <intercept-url pattern="/**" access="isAuthenticated()" />
         

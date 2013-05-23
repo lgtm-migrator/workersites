@@ -5,8 +5,7 @@
     <artifactId>workersites</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Tobacco</name>
-    <description>Tobacco Application</description>
+    <description>Site internet de rencontre immobiliere.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -125,4 +124,5 @@
     <module>workersites-webapp</module>
     <module>workersites-commons</module>
   </modules>
+  <name>Immo et moi</name>
 </project>

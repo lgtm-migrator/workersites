@@ -4,8 +4,8 @@
 	<pluginVersion><![CDATA[3.2.0.201303060654-RELEASE]]></pluginVersion>
 	<configs>
 		<config>
-			<file>src/main/webapp/WEB-INF/flows/register-flow.xml</file>
-			<name><![CDATA[register-flow]]></name>
+			<file>src/main/webapp/WEB-INF/flows/signup-flow.xml</file>
+			<name><![CDATA[signup-flow]]></name>
 		</config>
 	</configs>
 </webflow-project-description>

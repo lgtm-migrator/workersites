@@ -6,7 +6,7 @@
 
 	<persistence-context />
 	
-	<view-state id="start_subscription" view="start_subscription">
+	<view-state id="signup" view="signup">
 		<transition on="submit" to="subscription_ok" />
 		<transition on="lostpassword" to="recovery_form" />
 	</view-state>

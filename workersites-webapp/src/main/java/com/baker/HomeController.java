@@ -23,11 +23,11 @@ public class HomeController {
         return "view.home";
     }
     
-    @RequestMapping("/flow/start_subscription")
+    @RequestMapping("/signup")
     public String startHome(Principal principal, Model model) {
     	if (principal != null)
     		model.addAttribute("username", principal.getName());
-        return "view.start_subscription";
+        return "view.signup";
     }
     
 }
