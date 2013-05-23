@@ -46,7 +46,7 @@
     <bean name="/error/404" parent="directViewMapping" p:viewName="error.404" />
     <bean name="/error/*" parent="directViewMapping" p:viewName="error.general" />
 
-    <bean id="messageSource" class="com.baker.util.ReloadableMessageSource">
+    <bean id="messageSource" class="com.baker.util.ReloadableMessageSource"> <!-- permet de déclarer les fichiers message présent dans resources. -->
         <property name="cacheSeconds" value="5"/>
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="fallbackToSystemLocale" value="false"/>
@@ -59,10 +59,22 @@
             </list>
         </property>
     </bean>
-
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+<!--  
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"> 
         <property name="defaultLocale" value="en"/>
     </bean>
+    -->
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    	<property name="paramName" value="lang" />
+	</bean>
+    
+    <bean id="CooklocaleResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    	
+    	  <property name="cookieName" value="clientlanguage"/>
+		  <!-- in seconds. If set to -1, the cookie is not persisted (deleted when browser shuts down) -->
+		  <property name="cookieMaxAge" value="100000"/>
+	</bean>
+
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="0">

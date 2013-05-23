@@ -46,6 +46,17 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+                    
+                    <div class="btn-group">
+					    <a class="btn dropdown-toggle" data-toggle="dropdown" href="?lang=en">
+					    EN
+					    <span class="caret"></span>
+					    </a>
+					    <ul class="dropdown-menu">
+					     <li><a tabindex="-1" href="?lang=fr">FR</a></li>					
+					    </ul>
+				    </div>
+                    
                 </ul>
             </div> <!--/.nav-collapse -->
         </div>
