@@ -10,6 +10,7 @@
 <%@ taglib prefix="tb" uri="/WEB-INF/taglib/taglib.tld" %>
 
 <tiles:importAttribute name="view" toName="selectedView" />
+<c:set var="localeCode" value="${pageContext.response.locale.language}" />
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
@@ -49,10 +50,11 @@
                     
                     <div class="btn-group">
 					    <a class="btn dropdown-toggle" data-toggle="dropdown" href="?lang=en">
-					    EN
+					    ${fn:toUpperCase(localeCode)}
 					    <span class="caret"></span>
 					    </a>
 					    <ul class="dropdown-menu">
+					    <li><a tabindex="-1" href="?lang=en">EN</a></li>
 					     <li><a tabindex="-1" href="?lang=fr">FR</a></li>					
 					    </ul>
 				    </div>

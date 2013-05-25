@@ -34,7 +34,10 @@
     <mvc:default-servlet-handler/>
 
     <mvc:interceptors>
-        <bean class="com.baker.cache.IFNoneMatchHandlerInterceptor" />
+        <bean class="com.baker.cache.IFNoneMatchHandlerInterceptor" /> 
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    		<property name="paramName" value="lang" />
+		</bean>
     </mvc:interceptors>
 
     <bean id="directViewMapping" abstract="true" class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
@@ -59,22 +62,12 @@
             </list>
         </property>
     </bean>
-<!--  
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"> 
-        <property name="defaultLocale" value="en"/>
-    </bean>
-    -->
-    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-    	<property name="paramName" value="lang" />
-	</bean>
-    
-    <bean id="CooklocaleResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-    	
+	
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">	
     	  <property name="cookieName" value="clientlanguage"/>
 		  <!-- in seconds. If set to -1, the cookie is not persisted (deleted when browser shuts down) -->
 		  <property name="cookieMaxAge" value="100000"/>
 	</bean>
-
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="0">
