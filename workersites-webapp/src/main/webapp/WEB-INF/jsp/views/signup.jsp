@@ -18,63 +18,72 @@
 
 <div class="well">    
       <form id="signup" class="form-horizontal" method="post" action="success.php">
-		<legend>Sign Up</legend>		
+		<legend><spring:message code="signup.title.label" /></legend>		
 		<div class="control-group">
-	        <label class="control-label">First Name</label>
+	        <label class="control-label"><spring:message code="signup.firstname.label" /></label>
 			<div class="controls">
 			    <div class="input-prepend">
 				<span class="add-on"><i class="icon-user"></i></span>
-					<input type="text" class="input-xlarge" id="fname" name="fname" placeholder="First Name">
+					<input type="text" class="input-xlarge" id="fname" name="fname" placeholder="<spring:message code="signup.firstname_helper.label" />">
 				</div>
 			</div>
 		</div>
 		<div class="control-group ">
-	        <label class="control-label">Last Name</label>
+	        <label class="control-label"><spring:message code="signup.lastname.label" /></label>
 			<div class="controls">
 			    <div class="input-prepend">
 				<span class="add-on"><i class="icon-user"></i></span>
-					<input type="text" class="input-xlarge" id="lname" name="lname" placeholder="Last Name">
+					<input type="text" class="input-xlarge" id="lname" name="lname" placeholder="<spring:message code="signup.lastname_helper.label" />">
 				</div>
 			</div>
 		</div>
 		<div class="control-group">
-	        <label class="control-label">Email</label>
+	        <label class="control-label"><spring:message code="signup.email.label" /></label>
 			<div class="controls">
 			    <div class="input-prepend">
 				<span class="add-on"><i class="icon-envelope"></i></span>
-					<input type="text" class="input-xlarge" id="email" name="email" placeholder="Email">
+					<input type="text" class="input-xlarge" id="email" name="email" placeholder="<spring:message code="signup.email_helper.label" />">
 				</div>
 			</div>	
 		</div>
 		<div class="control-group">
-	        <label class="control-label">Gender</label>
+	        <label class="control-label"><spring:message code="signup.gender.label" /></label>
 			<div class="controls">
 			    
 					<p>
 			<div id="gender" name="gender" class="btn-group" data-toggle="buttons-radio">  
-                    <button type="button" class="btn btn-info">Male</button>  
-                    <button type="button" class="btn btn-info">Female</button>  
+                    <button id="Male" type="button" class="btn btn-info"><spring:message code="signup.genderM.label" /></button>  
+                    <button id="Female" type="button" class="btn btn-info"><spring:message code="signup.genderF.label" /></button>  
                     
             </div>    
                   </p>
 				
 			</div>
 		</div>
-		<div class="control-group">
-	        <label class="control-label">Password</label>
+		<div id="fmaidengroup" class="control-group hide">
+	        <label class="control-label"><spring:message code="signup.maidenname.label" /></label>
 			<div class="controls">
 			    <div class="input-prepend">
-				<span class="add-on"><i class="icon-lock"></i></span>
-					<input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="Password">
+				<span class="add-on"><i class="icon-user"></i></span>
+					<input type="text" class="input-xlarge" id="fmaidenname" name="fmaidenname" placeholder="<spring:message code="signup.maidenname_helper.label" />">
 				</div>
 			</div>
 		</div>
 		<div class="control-group">
-	        <label class="control-label">Confirm Password</label>
+	        <label class="control-label"><spring:message code="signup.password.label" /></label>
 			<div class="controls">
 			    <div class="input-prepend">
 				<span class="add-on"><i class="icon-lock"></i></span>
-					<input type="Password" id="conpasswd" class="input-xlarge" name="conpasswd" placeholder="Re-enter Password">
+					<input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="<spring:message code="signup.password_helper.label" />">
+				</div>
+			</div>
+		</div>
+		<div class="control-group">
+	        <label class="control-label"><spring:message code="signup.repassword.label" /></label>
+			<div class="controls">
+			    <div class="input-prepend">
+				<span class="add-on"><i class="icon-lock"></i></span>
+					<input type="Password" id="conpasswd" class="input-xlarge" name="conpasswd" placeholder="<spring:message code="signup.repassword_helper.label" />">
 				</div>
 			</div>
 		</div>
@@ -82,7 +91,7 @@
 		<div class="control-group">
 		<label class="control-label" for="input01"></label>
 	      <div class="controls">
-	       <button type="submit" class="btn btn-success" rel="tooltip" title="first tooltip">Create My Account</button>
+	       <button type="submit" class="btn btn-success" rel="tooltip" title="first tooltip"><spring:message code="signup.submit.label" /></button>
 	       
 	      </div>
 	
@@ -98,7 +107,7 @@
 <script type="text/javascript">
 	  $(window).ready(function(){
 			
-			$("#signup").validate({
+		   $("#signup").validate({
 				rules:{
 					fname:"required",
 					lname:"required",
@@ -119,6 +128,25 @@
 				
 				errorClass: "help-inline"
 				
+			});
+			
+			var hiddenBox = $( "#fmaidengroup" );
+			$( "#gender button" ).on( "click", function( event ) {
+				if (this.id == "Male") {
+					hiddenBox.addClass("hide");
+					$("#fmaidenname").rules("remove", required);
+					
+					//$("#fmaidenname").removeAttr("required");
+				} else {
+					hiddenBox.removeClass("hide");
+					$("#fmaidenname").rules("add", {
+						required: true
+					});
+					//$("#fmaidenname").prop("required", true);
+					
+				}
+					
+			
 			});
 		});
 </script>
