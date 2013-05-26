@@ -16,17 +16,17 @@
 
 <div class="container">
 <div class="row.fluid">
-	<div class="span6">
+	<div class="span11">
 		<div class="well"> 
 		<legend><spring:message code="signup.registerwith.label" /></legend>
-			<div class="btn-group" data-toggle="buttons-radio">
-			    <button type="button" class="btn btn-primary">Facebook</button>
-			    <button type="button" class="btn btn-primary">Twitter</button>
-			    <button type="button" class="btn btn-primary">Google</button>
+			<div class="btn-group">		    
+			    <a class="btn btn-primary" href="signup/facebook" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Facebook</a>
+			    <a class="btn btn-primary" href="signup/twitter" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Twitter</a>			    
+			    <a class="btn btn-primary" href="signup/google" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Google</a>   
 			</div>
 		</div> 
 	</div>
-	<div class="span6">
+	<div class="span11">
 		<div class="well">    
 		      <form id="signup" class="form-horizontal" method="post" action="success.php">
 				<legend><spring:message code="signup.title.label" /></legend>		
