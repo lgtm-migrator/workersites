@@ -7,6 +7,7 @@
 	<persistence-context />
 	
 	<view-state id="signup" view="signup">
+		
 		<transition on="submit" to="subscription_ok" />
 		<transition on="lostpassword" to="recovery_form" />
 	</view-state>
@@ -14,5 +15,6 @@
 	<view-state id="subscription_ok" view="subscription_ok" />
 
 	<view-state id="recovery_form" view="recovery_form" />
+	
 	
 </flow>
