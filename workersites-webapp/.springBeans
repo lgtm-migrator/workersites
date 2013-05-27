@@ -7,6 +7,8 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
+		<config>src/main/webapp/WEB-INF/social-security.xml</config>
+		<config>src/main/webapp/WEB-INF/social.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

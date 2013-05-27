@@ -1,5 +1,3 @@
-package com.baker.social;
-
 /*
  * Copyright 2013 the original author or authors.
  *
@@ -15,39 +13,36 @@ package com.baker.social;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import java.util.List;
+package com.baker.social.facebook;
 
 import javax.inject.Inject;
 
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Simple little @Controller that invokes Facebook and renders the result.
- * The injected {@link Facebook} reference is configured with the required authorization credentials for the current user behind the scenes.
- * @author Keith Donald
- */
 @Controller
-public class SocialController {
+public class FacebookFeedController {
 
 	private final Facebook facebook;
-	
+
 	@Inject
-	public SocialController(Facebook facebook) {
+	public FacebookFeedController(Facebook facebook) {
 		this.facebook = facebook;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		List<Reference> friends = facebook.friendOperations().getFriends();
-		model.addAttribute("friends", friends);
-		return "home";
+	@RequestMapping(value="/facebook/feed", method=RequestMethod.GET)
+	public String showFeed(Model model) {
+		model.addAttribute("feed", facebook.feedOperations().getFeed());
+		return "facebook/feed";
 	}
-
+	
+	@RequestMapping(value="/facebook/feed", method=RequestMethod.POST)
+	public String postUpdate(String message) {
+		facebook.feedOperations().updateStatus(message);
+		return "redirect:/facebook/feed";
+	}
+	
 }
-
