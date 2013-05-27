@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 
-	<context:property-placeholder location="classpath:/com/baker/social/config/application.properties" />
+ <!-- <context:property-placeholder location="classpath:/com/baker/social/config/application.properties" />  -->	
 
 	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="socialshowcase" />
 	<twitter:config app-id="${twitter.consumerKey}" app-secret="${twitter.consumerSecret}"/>

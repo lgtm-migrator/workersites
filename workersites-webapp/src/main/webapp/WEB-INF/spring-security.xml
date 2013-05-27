@@ -29,18 +29,41 @@
         
         <intercept-url pattern="/**" access="isAuthenticated()" />
         
-       <!--   <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+    <!--   <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> -->
 		
         <form-login login-page="/login" authentication-failure-url="/login" default-target-url="/home" />
         <logout logout-url="/logout" logout-success-url="/home" delete-cookies="JSESSIONID" />
-
+		
+	<!--  Spring Social Security authentication filter -->
+		<custom-filter ref="socialAuthenticationFilter" before="PRE_AUTH_FILTER" />
+		
         <session-management session-fixation-protection="newSession">
              <concurrency-control max-sessions="1" />
          </session-management>
     </http>
-
-    <authentication-manager>
+    
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsService">
+			<password-encoder ref="passwordEncoder" />
+		</authentication-provider>
+		
+		<!-- Spring Social Security authentication provider -->
+		<authentication-provider ref="socialAuthenticationProvider" />
+	</authentication-manager>	
+	
+	<jdbc-user-service id="userDetailsService" 
+					data-source-ref="dataSource" 
+					users-by-username-query="select username, password, true from Account where username = ?"
+					authorities-by-username-query="select username, 'ROLE_USER' from Account where username = ?"/>
+					
+	<beans:bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
+		factory-method="noOpText" />
+		
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"
+		factory-method="getInstance" />
+		
+  <!-- <authentication-manager>
         <authentication-provider>
             <user-service>
                 <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>
@@ -48,4 +71,5 @@
             </user-service>
         </authentication-provider>
     </authentication-manager>
+     -->  
 </beans:beans>

@@ -11,7 +11,9 @@
 
 	<import resource="social-security.xml" />
 	
-	<context:property-placeholder location="classpath:com/baker/social/config/application.properties"/>
+	<import resource="data.xml" />
+	
+<!--  <context:property-placeholder location="classpath:/com/baker/social/config/application.properties"/> -->	
 	
     <context:spring-configured/>
 
