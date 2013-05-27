@@ -32,6 +32,7 @@
     <!--   <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> -->
 		
+		<remember-me />
         <form-login login-page="/login" authentication-failure-url="/login" default-target-url="/home" />
         <logout logout-url="/logout" logout-success-url="/home" delete-cookies="JSESSIONID" />
 		

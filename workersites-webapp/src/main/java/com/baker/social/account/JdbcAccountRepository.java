@@ -30,10 +30,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class JdbcAccountRepository implements AccountRepository {
 
-	private final JdbcTemplate jdbcTemplate;
+	private  JdbcTemplate jdbcTemplate;
 
-	private final PasswordEncoder passwordEncoder;
+	private  PasswordEncoder passwordEncoder;
+	
+	
 
+	JdbcAccountRepository() {
+		
+	}
+	
 	@Inject
 	public JdbcAccountRepository(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
 		this.jdbcTemplate = jdbcTemplate;

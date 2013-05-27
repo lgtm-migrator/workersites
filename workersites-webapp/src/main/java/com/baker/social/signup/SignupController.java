@@ -44,7 +44,7 @@ public class SignupController {
 		this.accountRepository = accountRepository;
 	}
 
-	@RequestMapping(value="/signup", method=RequestMethod.GET)
+	@RequestMapping(value="/social_signup", method=RequestMethod.GET)
 	public SignupForm signupForm(WebRequest request) {
 		Connection<?> connection = ProviderSignInUtils.getConnection(request);
 		if (connection != null) {
@@ -55,7 +55,7 @@ public class SignupController {
 		}
 	}
 
-	@RequestMapping(value="/signup", method=RequestMethod.POST)
+	@RequestMapping(value="/social_signup", method=RequestMethod.POST)
 	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
 		if (formBinding.hasErrors()) {
 			return null;

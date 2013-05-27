@@ -5,15 +5,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-    <context:property-placeholder location="/WEB-INF/jdbc.properties"/>
+    <context:property-placeholder location="/WEB-INF/*.properties"/>
 
 	<import resource="social.xml" />
 
 	<import resource="social-security.xml" />
 	
 	<import resource="data.xml" />
-	
-<!--  <context:property-placeholder location="classpath:/com/baker/social/config/application.properties"/> -->	
 	
     <context:spring-configured/>
 
@@ -33,11 +31,11 @@
             </list>
         </property>
     </bean>
-
-    <bean id="validator"
+<!--  <bean id="validator"
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="validationMessageSource" ref="applicationMessageSource" />
-    </bean>
+    </bean>  -->
+   
 
     <!-- Custom property editors -->
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
