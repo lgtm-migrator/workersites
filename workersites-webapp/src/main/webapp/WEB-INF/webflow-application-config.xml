@@ -6,9 +6,10 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Enables the Webflow controller delegation -->
-    <bean name="/flow/signup"
+    <bean name="/*.auth"
     	 class="org.springframework.webflow.mvc.servlet.FlowController"> 
     	 <property name="flowExecutor" ref="flowExecutor" />
+    	 
 	</bean>
 	
 	<webflow:flow-executor id="flowExecutor" /> 

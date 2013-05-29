@@ -36,7 +36,7 @@
                     </c:forEach>
                 </ul>
                 <ul class="nav pull-right">
-                    <c:forEach var="item" items="signup,contact,signin">
+                    <c:forEach var="item" items="signup-flow.auth,contact,signin">
                         <spring:message var="itemTitle" code="navbar.${item}.title" />
                         <c:choose>
                             <c:when test="${item eq selectedView}">

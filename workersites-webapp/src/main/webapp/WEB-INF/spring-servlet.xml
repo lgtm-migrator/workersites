@@ -40,11 +40,16 @@
 		</bean>
     </mvc:interceptors>
 
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+	
     <bean id="directViewMapping" abstract="true" class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
     <!-- <bean name="/home" parent="directViewMapping" p:viewName="view.home" /> --> 
     <bean name="/about" parent="directViewMapping" p:viewName="view.about" />
     <bean name="/login" parent="directViewMapping" p:viewName="view.login" />
     <bean name="/contact" parent="directViewMapping" p:viewName="view.contact" />
+    
+    <bean name="/signup" parent="directViewMapping" p:viewName="view.signup" />
+    <bean name="/signin" parent="directViewMapping" p:viewName="view.signin" />
 
     <bean name="/error/404" parent="directViewMapping" p:viewName="error.404" />
     <bean name="/error/*" parent="directViewMapping" p:viewName="error.general" />

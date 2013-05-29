@@ -6,15 +6,16 @@
 
 	<persistence-context />
 	
-	<view-state id="signup" view="signup">
-		
+	<view-state id="signup" view="view.signup">
+		<transition on="social_signin" to="social_auth" />
 		<transition on="submit" to="subscription_ok" />
 		<transition on="lostpassword" to="recovery_form" />
 	</view-state>
 	
+	<view-state id="social_auth" view="/social_signin/authenticate" />
+	
 	<view-state id="subscription_ok" view="subscription_ok" />
 
 	<view-state id="recovery_form" view="recovery_form" />
-	
 	
 </flow>

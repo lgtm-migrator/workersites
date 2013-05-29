@@ -17,6 +17,9 @@
     </c:when>
     <c:otherwise>
 
+ 		<util:js value="/resources/js/vendor/jquery-1.9.1.js"/>
+        <util:js value="/resources/js/vendor/jquery.validate.js"/>
+        
         <%-- HTML5 boilerplate, see: http://html5boilerplate.com/--%>
         <%--<util:css href="/resources/css/vendor/normalize-1.1.0.css" />--%>
         <%--<util:css href="/resources/css/vendor/boilerplate-4.1.0.css" />--%>

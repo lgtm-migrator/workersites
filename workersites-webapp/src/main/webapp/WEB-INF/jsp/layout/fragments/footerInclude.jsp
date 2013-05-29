@@ -46,8 +46,7 @@
         <%-- should be included in the same order as in pom.xml in yui compression plugin --%>
         <util:js value="/resources/js/compatibility.js"/>
 
-        <util:js value="/resources/js/vendor/jquery-1.9.1.js"/>
-        <util:js value="/resources/js/vendor/jquery.validate.js"/>
+       
         
         <util:js value="/resources/js/vendor/jquery.tinypubsub.js"/>
         <util:js value="/resources/js/vendor/jstorage-0.3.1.js"/>

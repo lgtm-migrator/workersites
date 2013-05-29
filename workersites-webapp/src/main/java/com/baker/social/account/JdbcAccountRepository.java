@@ -34,11 +34,7 @@ public class JdbcAccountRepository implements AccountRepository {
 
 	private  PasswordEncoder passwordEncoder;
 	
-	
-
-	JdbcAccountRepository() {
-		
-	}
+	JdbcAccountRepository() {}
 	
 	@Inject
 	public JdbcAccountRepository(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
