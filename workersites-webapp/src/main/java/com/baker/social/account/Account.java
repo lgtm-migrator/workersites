@@ -17,23 +17,29 @@ package com.baker.social.account;
 
 public class Account {
 
-	private final String username;
+	private final String email;
 
 	private final String password;
 
-	private final String firstName;
+	private final String fname;
+	
+	private final String gender;
+	
+	private final String maidenname;
 
-	private final String lastName;
+	private final String lname;
 
-	public Account(String username, String password, String firstName, String lastName) {
-		this.username = username;
+	public Account(String email, String password, String fname, String lname, String gender, String maidenname) {
+		this.email = email;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.fname = fname;
+		this.lname = lname;
+		this.gender = gender;
+		this.maidenname = maidenname;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getGender() {
+		return gender;
 	}
 
 	public String getPassword() {
@@ -41,10 +47,20 @@ public class Account {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return fname;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lname;
 	}
+
+	public String getMaidenName() {
+		return maidenname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	
 }

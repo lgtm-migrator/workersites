@@ -14,8 +14,10 @@
 	<import resource="data.xml" />
 	
     <context:spring-configured/>
+    
+	<!-- #TODO: Voir si le scan de tout les pkg est necessaire -->
 
-    <context:component-scan base-package="com.baker">
+    <context:component-scan base-package="com.baker, com.baker.social.security, com.baker.social.linkedin, com.baker.social.signin, com.baker.social.signup, com.baker.social.twitter">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
 

@@ -24,19 +24,23 @@
     <http pattern="/contact" security="none"/>
 
     <http pattern="/**" use-expressions="true">
+    <!-- Partie récupérée de l'exemple -->
+    	<intercept-url pattern="/favicon.ico" access="permitAll" />
+		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/auth/**" access="permitAll" />
+		<intercept-url pattern="/signin/**" access="permitAll" />
+		<intercept-url pattern="/signup/**" access="permitAll" />
+		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
+		
         <intercept-url pattern="/login" access="isAnonymous()" />
         <intercept-url pattern="/home" access="permitAll" />
         <intercept-url pattern="/signup" access="permitAll" />
         <intercept-url pattern="/signin" access="permitAll" />
-        <intercept-url pattern="/social_signin" access="permitAll" />
          <intercept-url pattern="/*.auth" access="permitAll" />
-        <intercept-url pattern="/**" access="isFullyAuthenticated()" />
+        <intercept-url pattern="/**" access="isAuthenticated()" />
         
-    <!--   <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> -->
-		
 		<remember-me />
-        <form-login username-parameter="email" password-parameter="passwd" login-page="/signin" authentication-failure-url="/signin" default-target-url="/home" />
+        <form-login username-parameter="email" login-processing-url="/signin/authenticate" password-parameter="passwd" login-page="/signin" authentication-failure-url="/signin" default-target-url="/home" />
         <logout logout-url="/logout" logout-success-url="/home" delete-cookies="JSESSIONID" />
 		
 	<!--  Spring Social Security authentication filter -->
@@ -45,6 +49,11 @@
         <session-management session-fixation-protection="newSession">
              <concurrency-control max-sessions="1" />
          </session-management>
+         
+         
+          <!--   <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> -->
+		
     </http>
     
 	<authentication-manager alias="authenticationManager">
@@ -58,8 +67,8 @@
 	
 	<jdbc-user-service id="userDetailsService" 
 					data-source-ref="dataSource" 
-					users-by-username-query="select username, password, true from Account where username = ?"
-					authorities-by-username-query="select username, 'ROLE_USER' from Account where username = ?"/>
+					users-by-username-query="select email, password, true from Account where email = ?"
+					authorities-by-username-query="select email, 'ROLE_USER' from Account where email = ?"/>
 					
 	<beans:bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
 		factory-method="noOpText" />

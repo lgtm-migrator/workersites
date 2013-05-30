@@ -11,42 +11,53 @@
 
 <util:js value="/resources/js/pages/home.js" />
 
-<spring:url value="/j_spring_security_check" var="security_check_url" />
-
-<c:set var="authException" value="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION']}" />
-
 
 <h1>Subscription page</h1>
 <p>Welcome to registration page.<br> All you get is this message and a barebones HTML document.</p>
 
-<div class="container">
-<div class="alert" >flowExecutionKey: ${flowExecutionKey} <br/>
-eventId: ${eventId}
- </div>
+
+
+
+<c:url value="/signup" var="signupUrl" />
+<c:if test="${not empty message}">
+	<div class="container">
+		<div class="alert" >
+				<div class="${message.type.cssClass}">${message.text}</div>
+		</div>
+	</div>
+</c:if>
 
 <div class="row.fluid">
 	<div class="span11">
 		<div class="well"> 
 		<legend><spring:message code="signup.registerwith.label" /></legend>
 			<div class="btn-group">		    
-			    <a class="btn btn-primary" href="signup/facebook" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Facebook</a>
-			    <a class="btn btn-primary" href="signup/twitter" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Twitter</a>			    
-			    <a class="btn btn-primary" href="signup/google" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Google</a>   
+			    <a class="btn btn-primary" href="<c:url value="/auth/facebook"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Facebook</a>
+			    <a class="btn btn-primary" href="<c:url value="/auth/twitter"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Twitter</a>			    
+			    <a class="btn btn-primary" href="<c:url value="/auth/google"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Google</a>   
+			    <a class="btn btn-primary" href="<c:url value="/auth/linkedin"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">LinkedIn</a>   
 			</div>
 		</div> 
 	</div>
 	<div class="span11">
 		<div class="well">    
-		      <form id="signup" class="form-horizontal" method="post" action="${security_check_url}">
+		      <form:form id="signup" class="form-horizontal" method="post" action="${signupUrl}" modelAttribute="signupForm" >
 			       <fieldset>
 					<legend><spring:message code="signup.title.label" /></legend>
-       				<c:if test="${not empty authException}">
-					<div class="control-group alert alert-error">
-			            <div class="controls">
-			                <p class="text-error"><spring:message code="signup.signinfailed.label" /> ${fn:toLowerCase(authException.message)}</p>
-			            </div>
-			        </div>
-			 		</c:if>
+			 			 		
+						<spring:bind path="*">
+							<c:choose>
+								<c:when test="${status.error}">
+								<div class="control-group alert alert-error">	
+									<div class="controls">
+										<p class="text-error"><spring:message code="signup.signinfailed.label" />Unable to sign up. Please fix the errors below and resubmit.</p>
+									</div>
+								</div>
+								</c:when>
+							</c:choose>                     
+						</spring:bind>
+					
+	
 					<div class="control-group">
 				        <label class="control-label" for="fname"><spring:message code="signup.firstname.label" /></label>
 						<div class="controls">
@@ -91,12 +102,12 @@ eventId: ${eventId}
 							<span class="help-inline"><spring:message code="signup.gender_required.label" /></span>
 						</div>
 					</div>
-					<div id="fmaidengroup" class="control-group hide">
+					<div id="maidengroup" class="control-group hide">
 				        <label class="control-label"><spring:message code="signup.maidenname.label" /></label>
 						<div class="controls">
 						    <div class="input-prepend">
 							<span class="add-on"><i class="icon-user"></i></span>
-								<input type="text" class="input-xlarge" id="fmaidenname" name="fmaidenname" placeholder="<spring:message code="signup.maidenname_helper.label" />">
+								<input type="text" class="input-xlarge" id="maidenname" name="maidenname" placeholder="<spring:message code="signup.maidenname_helper.label" />">
 								<span class="help-inline"><spring:message code="signup.maidenname_required.label" /></span>	
 							</div>
 						</div>
@@ -126,12 +137,14 @@ eventId: ${eventId}
 						<label class="control-label" for="input01"></label>
 					      <div class="controls">
 					       <button type="submit" class="btn btn-success" rel="tooltip" title="<spring:message code="signup.submit_tooltip.label" />"><spring:message code="signup.submit.label" /></button>
-					       
-					      </div>
+					</div>
 					
 					</div>
+					
+					<a class="btn btn-primary" href="signup-flow.auth?_eventId=signin"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Ou se connecter</a>
+					
 				 </fieldset>
-			  </form>
+			  </form:form>
 		
 		   </div>
 	   </div>
@@ -183,19 +196,19 @@ eventId: ${eventId}
 
 			});
 			
-			var hiddenBox = $( "#fmaidengroup" );
+			var hiddenBox = $( "#maidengroup" );
 			$( "#gender button" ).on( "click", function( event ) {
 				if (this.id == "Male") {
 					hiddenBox.addClass("hide");
-					$("#fmaidenname").rules("remove", required);
+					$("#maidenname").rules("remove", required);
 					
-					//$("#fmaidenname").removeAttr("required");
+					//$("#maidenname").removeAttr("required");
 				} else {
 					hiddenBox.removeClass("hide");
-					$("#fmaidenname").rules("add", {
+					$("#maidenname").rules("add", {
 						required: true
 					});
-					//$("#fmaidenname").prop("required", true);
+					//$("#maidenname").prop("required", true);
 					
 				}
 					

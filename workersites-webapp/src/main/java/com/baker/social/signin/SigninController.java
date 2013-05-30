@@ -15,14 +15,27 @@
  */
 package com.baker.social.signin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
+
+
 @Controller
 public class SigninController {
 
-	@RequestMapping(value="/social_signin", method=RequestMethod.GET)
-	public void signin() {
+	@RequestMapping(value="/signin", method=RequestMethod.GET)
+	public String signin() {
+		Logger logger = LoggerFactory.getLogger("com.baker.social.signin.SigninController.signin");
+	    logger.debug("Hello world. I'm signin");
+
+	    // TODO: A SUPPRIMER EXEMPLE DE LOG print internal state
+	    LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+	    StatusPrinter.print(lc);
+		return "view.signin";
 	}
 }

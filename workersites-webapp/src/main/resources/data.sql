@@ -1,4 +1,3 @@
-insert into Account (username, password, firstName, lastName) values ('habuma', 'freebirds', 'Craig', 'Walls');
-insert into Account (username, password, firstName, lastName) values ('kdonald', 'melbourne', 'Keith', 'Donald');
-insert into Account (username, password, firstName, lastName) values ('rclarkson', 'atlanta', 'Roy', 'Clarkson');
+insert into Account (email, password, fname, lname, gender, maidenname) values ('azman0101@hotmail.com', ';;::jj22', 'BOULANGER', 'Julien', 'M', null);
+insert into Account (email, password, fname, lname, gender, maidenname)  values ('jules.boulanger@gmail.com', 'melbourne', 'BOULANGER', 'Julien', 'M', null);
 

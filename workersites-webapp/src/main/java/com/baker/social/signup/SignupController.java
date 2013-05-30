@@ -44,7 +44,7 @@ public class SignupController {
 		this.accountRepository = accountRepository;
 	}
 
-	@RequestMapping(value="/social_signup", method=RequestMethod.GET)
+	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public SignupForm signupForm(WebRequest request) {
 		Connection<?> connection = ProviderSignInUtils.getConnection(request);
 		if (connection != null) {
@@ -55,15 +55,15 @@ public class SignupController {
 		}
 	}
 
-	@RequestMapping(value="/social_signup", method=RequestMethod.POST)
+	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
 		Account account = createAccount(form, formBinding);
 		if (account != null) {
-			SignInUtils.signin(account.getUsername());
-			ProviderSignInUtils.handlePostSignUp(account.getUsername(), request);
+			SignInUtils.signin(account.getEmail());
+			ProviderSignInUtils.handlePostSignUp(account.getEmail(), request);
 			return "redirect:/";
 		}
 		return null;
@@ -73,11 +73,11 @@ public class SignupController {
 	
 	private Account createAccount(SignupForm form, BindingResult formBinding) {
 		try {
-			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
+			Account account = new Account(form.getEmail(), form.getPassword(), form.getFirstName(), form.getLastName(), form.getGender(), form.getMaidenname());
 			accountRepository.createAccount(account);
 			return account;
 		} catch (UsernameAlreadyInUseException e) {
-			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
+			formBinding.rejectValue("email", "user.duplicateUsername", "already in use");
 			return null;
 		}
 	}

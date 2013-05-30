@@ -11,9 +11,13 @@
 
 <util:js value="/resources/js/pages/home.js" />
 
-<spring:url value="/j_spring_security_check" var="security_check_url" />
+<!-- Valeur par défaut de l'url login-processing-url= présente dans le champs form-login de spring-security.xml -->
+<!-- <spring:url value="/j_spring_security_check" var="security_check_url" /> --> 
+<spring:url value="/signin/authenticate" var="security_check_url" />
 
 <c:set var="authException" value="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION']}" />
+<c:set var="authUserNameException" value="${sessionScope['SPRING_SECURITY_LAST_USERNAME']}" />
+
 
 
 <h1><spring:message code="signin.title.label" /></h1>
@@ -29,9 +33,11 @@ eventId: ${eventId}
 		<div class="well"> 
 		<legend><spring:message code="signin.registerwith.label" /></legend>
 			<div class="btn-group">		    
-			    <a class="btn btn-primary" href="signup/facebook" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Facebook</a>
-			    <a class="btn btn-primary" href="signup/twitter" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Twitter</a>			    
-			    <a class="btn btn-primary" href="signup/google" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Google</a>   
+			    <a class="btn btn-primary" href="<c:url value="/auth/facebook"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By Facebook']);">Facebook</a>
+			    <a class="btn btn-primary" href="<c:url value="/auth/twitter"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By Twitter']);">Twitter</a>			    
+			    <a class="btn btn-primary" href="<c:url value="/auth/google"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By Google']);">Google</a>   
+			    <a class="btn btn-primary" href="<c:url value="/auth/linkedin"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By LinkedIn']);">LinkedIn</a>   
+			    
 			</div>
 		</div> 
 	</div>
@@ -40,10 +46,10 @@ eventId: ${eventId}
 		      <form id="signin" class="form-horizontal" method="post" action="${security_check_url}">
 			       <fieldset>
 					<legend><spring:message code="signin.title.label" /></legend>
-       				<c:if test="${not empty authException}">
+       				<c:if test="${not empty authException} || ${not empty authUserNameException}">
 					<div class="control-group alert alert-error">
 			            <div class="controls">
-			                <p class="text-error"><spring:message code="signin.signinfailed.label" /> ${fn:toLowerCase(authException.message)}</p>
+			                <p class="text-error"><spring:message code="signin.signinfailed.label" /> ${fn:toLowerCase(authException.message)} <br /> ${fn:toLowerCase(authUserNameException.message)}</p>
 			            </div>
 			        </div>
 			 		</c:if>
@@ -80,9 +86,6 @@ eventId: ${eventId}
            
                 	</div>
                 		
-            	
-					
-					
 					<div class="control-group">
 						<label class="control-label" for="input01"></label>
 					      <div class="controls">
