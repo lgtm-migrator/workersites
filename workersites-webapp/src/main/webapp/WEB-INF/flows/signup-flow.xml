@@ -6,7 +6,11 @@
 
 	<persistence-context />
 	
-	<view-state id="signup" view="view.signup">
+	<on-start>
+		<evaluate expression="com.baker.social.signup.SignupForm.fromProviderUser(UserProfile)" result="flowScope.orderForm" />
+	</on-start>
+
+	<view-state id="signup" view="view.signup" model="signupForm">
 		<transition on="signin" to="signin_state" />
 		<transition on="submit" to="subscription_ok" />
 		<transition on="lostpassword" to="recovery_form" />
