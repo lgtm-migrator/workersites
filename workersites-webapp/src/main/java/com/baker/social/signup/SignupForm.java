@@ -84,7 +84,7 @@ public class SignupForm {
 		form.setFirstName(providerUser.getFirstName());
 		form.setLastName(providerUser.getLastName());
 		form.setEmail(providerUser.getEmail());
-		
+		form.setGender(providerUser.g)
 		return form;
 	}
 
