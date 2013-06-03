@@ -5,11 +5,15 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<persistence-context />
-	
+	<var name="SignupForm" class="com.baker.social.signup.SignupForm" />
+	<!--
 	<on-start>
-		<evaluate expression="com.baker.social.signup.SignupForm.fromProviderUser(UserProfile)" result="flowScope.orderForm" />
+	 	<evaluate expression="org.springframework.social.connect.web.ProviderSignInUtils.getConnection(#{externalContext.nativeContext})" result="flowScope.connection" ></evaluate>
+		<evaluate expression="com.baker.social.signup.SignupForm.fromProviderUser(#{flowScope.connection.fetchUserProfile()})" result="flowScope.orderForm" /> 	
+	
+		<evaluate expression="com.baker.social.signup.SignupController.signupForm(flowRequestContext)" result="flowScope.orderForm" />
 	</on-start>
-
+-->
 	<view-state id="signup" view="view.signup" model="signupForm">
 		<transition on="signin" to="signin_state" />
 		<transition on="submit" to="subscription_ok" />

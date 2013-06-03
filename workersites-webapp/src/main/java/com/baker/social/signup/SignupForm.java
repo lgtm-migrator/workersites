@@ -15,17 +15,26 @@
  */
 package com.baker.social.signup;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.social.connect.UserProfile;
 
-public class SignupForm {
+@Entity
+public class SignupForm implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4913140439393414722L;
 
 	@NotEmpty
 	private String email;
 
-	@Size(min = 6, message = "must be at least 8 characters")
+	@Size(min = 8, message = "must be at least 8 characters")
 	private String password;
 
 	@NotEmpty
@@ -84,7 +93,6 @@ public class SignupForm {
 		form.setFirstName(providerUser.getFirstName());
 		form.setLastName(providerUser.getLastName());
 		form.setEmail(providerUser.getEmail());
-		form.setGender(providerUser.g)
 		return form;
 	}
 
