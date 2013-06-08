@@ -15,38 +15,36 @@
  */
 package com.baker.social.signup;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.social.connect.UserProfile;
 
-@Entity
-public class SignupForm implements Serializable {
+import com.baker.util.Gender;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4913140439393414722L;
+
+public class SignupForm {
+
 
 	@NotEmpty
 	private String email;
 
 	@Size(min = 8, message = "must be at least 8 characters")
 	private String password;
+	
+	@Size(min = 8, message = "must be at least 8 characters")
+	private String conpassword;
 
 	@NotEmpty
-	private String fname;
+	private String firstName;
 	
 	@NotEmpty
-	private String gender;
+	private Gender gender;
 
 	private String maidenname;
 
 	@NotEmpty
-	private String lname;
+	private String lastName;
 
 	public String getEmail() {
 		return email;
@@ -56,11 +54,11 @@ public class SignupForm implements Serializable {
 		this.email = email;
 	}
 
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
@@ -72,28 +70,54 @@ public class SignupForm implements Serializable {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return fname;
+	/**
+	 * @return the conpassword
+	 */
+	public String getConpassword() {
+		return conpassword;
 	}
 
-	public void setFirstName(String fname) {
-		this.fname = fname;
+	/**
+	 * @param conpassword the conpassword to set
+	 */
+	public void setConpassword(String conpassword) {
+		this.conpassword = conpassword;
 	}
-
-	public String getLastName() {
-		return fname;
-	}
-
-	public void setLastName(String fname) {
-		this.fname = fname;
-	}
-
+	
 	public static SignupForm fromProviderUser(UserProfile providerUser) {
 		SignupForm form = new SignupForm();
 		form.setFirstName(providerUser.getFirstName());
 		form.setLastName(providerUser.getLastName());
 		form.setEmail(providerUser.getEmail());
 		return form;
+	}
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getMaidenname() {

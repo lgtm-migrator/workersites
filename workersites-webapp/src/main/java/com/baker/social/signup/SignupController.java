@@ -15,11 +15,15 @@
  */
 package com.baker.social.signup;
 
+import java.beans.PropertyEditorSupport;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
+
 import com.baker.social.account.Account;
 import com.baker.social.account.AccountRepository;
 import com.baker.social.account.UsernameAlreadyInUseException;
@@ -28,14 +32,18 @@ import com.baker.social.message.MessageType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baker.social.signin.SignInUtils;
+import com.baker.util.Gender;
 
 @Controller
-public class SignupController {
+public class SignupController  {
 
 	private final AccountRepository accountRepository;
 
@@ -43,21 +51,47 @@ public class SignupController {
 	public SignupController(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
 	}
+	
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
 
+		binder.registerCustomEditor(Gender.class, new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String value) throws IllegalArgumentException {
+			if(StringUtils.isEmpty(value))
+				return;
+			 
+			setValue(Gender.valueOf(value));
+			}
+			 
+			@Override
+			public String getAsText() {
+			if(getValue() == null)
+			return "";
+			 
+			return ((Gender) getValue()).name();
+			}
+		});
+	}
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
-	public SignupForm signupForm(WebRequest request) {
+	public ModelAndView signupForm(WebRequest request) {
 		Connection<?> connection = ProviderSignInUtils.getConnection(request);
 		if (connection != null) {
 			request.setAttribute("message", new Message(MessageType.INFO, "Your " + StringUtils.capitalize(connection.getKey().getProviderId()) + " account is not associated with a Spring Social Showcase account. If you're new, please sign up."), WebRequest.SCOPE_REQUEST);
-			return SignupForm.fromProviderUser(connection.fetchUserProfile());
+			ModelAndView mv = new ModelAndView("view.signup", "signupForm", SignupForm.fromProviderUser(connection.fetchUserProfile()));
+			mv.addObject("genders", Gender.values());
+			return mv;
 		} else {
-			return new SignupForm();
+			ModelAndView mv = new ModelAndView("view.signup", "signupForm", new SignupForm());
+			mv.addObject("genders", Gender.values());
+			return  mv;
 		}
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
 		if (formBinding.hasErrors()) {
+			
 			return null;
 		}
 		Account account = createAccount(form, formBinding);
@@ -73,7 +107,7 @@ public class SignupController {
 	
 	private Account createAccount(SignupForm form, BindingResult formBinding) {
 		try {
-			Account account = new Account(form.getEmail(), form.getPassword(), form.getFirstName(), form.getLastName(), form.getGender(), form.getMaidenname());
+			Account account = new Account(form.getEmail(), form.getPassword(), form.getFirstName(), form.getLastName(), form.getGender().getValue(), form.getMaidenname());
 			accountRepository.createAccount(account);
 			return account;
 		} catch (UsernameAlreadyInUseException e) {
@@ -81,5 +115,7 @@ public class SignupController {
 			return null;
 		}
 	}
+
+	
 
 }

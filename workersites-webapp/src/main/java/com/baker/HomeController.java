@@ -37,14 +37,14 @@ public class HomeController {
     		model.addAttribute("username", principal.getName());
         return "view.home";
     }
- /*   
+    /*
     @RequestMapping("/signup")
     public String startHome(Principal principal, Model model) {
     	if (principal != null)
     		model.addAttribute("username", principal.getName());
         return "view.signup";
     }
-   */ 
+    */
     
     @RequestMapping("/")
 	public String home(Principal currentUser, Model model) {

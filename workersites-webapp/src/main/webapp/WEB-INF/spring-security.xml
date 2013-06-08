@@ -11,7 +11,6 @@
     <http pattern="/crossdomain.xml" security="none"/>
     <http pattern="/favicon.ico" security="none"/>
     <http pattern="/apple-touch-*.png" security="none"/>
-<!-- <http pattern="/signupflow/**" security="none"/> -->	
 
     <http pattern="/resources/**" security="none"/>
 
@@ -29,7 +28,6 @@
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/auth/**" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
-		<intercept-url pattern="/signup/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
 		
         <intercept-url pattern="/login" access="isAnonymous()" />

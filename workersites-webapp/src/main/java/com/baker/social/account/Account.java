@@ -21,19 +21,19 @@ public class Account {
 
 	private final String password;
 
-	private final String fname;
+	private final String firstName;
 	
 	private final String gender;
 	
 	private final String maidenname;
 
-	private final String lname;
+	private final String lastName;
 
-	public Account(String email, String password, String fname, String lname, String gender, String maidenname) {
+	public Account(String email, String password, String firstName, String lastName, String gender, String maidenname) {
 		this.email = email;
 		this.password = password;
-		this.fname = fname;
-		this.lname = lname;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.gender = gender;
 		this.maidenname = maidenname;
 	}
@@ -47,11 +47,11 @@ public class Account {
 	}
 
 	public String getFirstName() {
-		return fname;
+		return firstName;
 	}
 
 	public String getLastName() {
-		return lname;
+		return lastName;
 	}
 
 	public String getMaidenName() {

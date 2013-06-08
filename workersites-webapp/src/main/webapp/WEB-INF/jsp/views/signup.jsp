@@ -11,12 +11,8 @@
 
 <util:js value="/resources/js/pages/home.js" />
 
-
 <h1>Subscription page</h1>
 <p>Welcome to registration page.<br> All you get is this message and a barebones HTML document.</p>
-
-
-
 
 <c:url value="/signup" var="signupUrl" />
 <c:if test="${not empty message}">
@@ -43,27 +39,14 @@
 		<div class="well">    
 		      <form:form id="signup" class="form-horizontal" method="post" action="${signupUrl}" modelAttribute="signupForm" >
 			       <fieldset>
-					<legend><spring:message code="signup.title.label" /></legend>
-			 			 		
-						<spring:bind path="*">
-							<c:choose>
-								<c:when test="${status.error}">
-								<div class="control-group alert alert-error">	
-									<div class="controls">
-										<p class="text-error"><spring:message code="signup.signinfailed.label" />Unable to sign up. Please fix the errors below and resubmit.</p>
-									</div>
-								</div>
-								</c:when>
-							</c:choose>                     
-						</spring:bind>
-					
-	
+					<legend><spring:message code="signup.title.label" /></legend>	
+				
 					<div class="control-group">
-				        <label class="control-label" for="fname"><spring:message code="signup.firstname.label" /></label>
+				        <label class="control-label" for="firstName"><spring:message code="signup.firstname.label" /></label>
 						<div class="controls">
 						    <div class="input-prepend">
-							<span class="add-on"><i class="icon-user"></i></span>
-								<input type="text" class="input-xlarge" id="fname" name="fname" placeholder="<spring:message code="signup.firstname_helper.label" />">
+							<span class="add-on"><i class="icon-user"></i></span> <spring:message code="signup.firstname_helper.label" var="firstname_helper" />
+								<form:input path="firstName" type="text" class="input-xlarge" id="firstName" name="firstName" placeholder="${firstname_helper}" />
 								<span class="help-inline"><spring:message code="signup.firstname_required.label" /></span>
 							</div>
 						</div>
@@ -72,8 +55,8 @@
 				        <label class="control-label"><spring:message code="signup.lastname.label" /></label>
 						<div class="controls">
 						    <div class="input-prepend">
-							<span class="add-on"><i class="icon-user"></i></span>
-								<input type="text" class="input-xlarge" id="lname" name="lname" placeholder="<spring:message code="signup.lastname_helper.label" />">
+							<span class="add-on"><i class="icon-user"></i></span> <spring:message code="signup.lastname_helper.label" var="lastname_helper" />
+								<form:input path="lastName" type="text" class="input-xlarge" id="lastName" name="lastName" placeholder="${lastname_helper}" />
 								<span class="help-inline"><spring:message code="signup.lastname_required.label" /></span>
 							</div>
 						</div>
@@ -82,8 +65,8 @@
 				        <label class="control-label"><spring:message code="signup.email.label" /></label>
 						<div class="controls">
 						    <div class="input-prepend">
-							<span class="add-on"><i class="icon-envelope"></i></span>
-								<input type="text" class="input-xlarge" id="email" name="email" placeholder="<spring:message code="signup.email_helper.label" />">
+							<span class="add-on"><i class="icon-envelope"></i></span> <spring:message code="signup.email_helper.label" var="email_helper" />
+								<form:input path="email" type="text" class="input-xlarge" id="email" name="email" placeholder="${email_helper}" />
 								<span class="help-inline"><spring:message code="signup.email_required.label" /></span>	
 							</div>
 						</div>	
@@ -91,23 +74,25 @@
 					<div class="control-group">
 				        <label class="control-label"><spring:message code="signup.gender.label" /></label>
 						<div class="controls">
-						    
-							<p>
+						    <spring:message code="signup.genderM.label" var="genderM"/>
+							<spring:message code="signup.genderF.label" var="genderF"/>
+							
 								<div id="gender" name="gender" class="btn-group" data-toggle="buttons-radio">  
-					                    <button id="Male" type="button" class="btn btn-info"><spring:message code="signup.genderM.label" /></button>  
-					                    <button id="Female" type="button" class="btn btn-info"><spring:message code="signup.genderF.label" /></button>  
-					                    
+										<c:forEach var="gender" items="${genders}">
+ 											<form:button path="gender" id="${gender}" type="button" value="${gender}" class="btn btn-info">${gender}</form:button>  											
+										</c:forEach>
+					                    <span class="help-inline"><spring:message code="signup.gender_required.label" /></span>
 					            </div>	
-			                </p>
-							<span class="help-inline"><spring:message code="signup.gender_required.label" /></span>
+			               
+							
 						</div>
 					</div>
 					<div id="maidengroup" class="control-group hide">
 				        <label class="control-label"><spring:message code="signup.maidenname.label" /></label>
 						<div class="controls">
 						    <div class="input-prepend">
-							<span class="add-on"><i class="icon-user"></i></span>
-								<input type="text" class="input-xlarge" id="maidenname" name="maidenname" placeholder="<spring:message code="signup.maidenname_helper.label" />">
+							<span class="add-on"><i class="icon-user"></i></span> <spring:message code="signup.maidenname_helper.label" var="maidenname_helper" />
+								<input type="text" class="input-xlarge" id="maidenname" name="maidenname" placeholder="${maidenname_helper}">
 								<span class="help-inline"><spring:message code="signup.maidenname_required.label" /></span>	
 							</div>
 						</div>
@@ -116,8 +101,8 @@
 				        <label class="control-label"><spring:message code="signup.password.label" /></label>
 						<div class="controls">
 						    <div class="input-prepend">
-							<span class="add-on"><i class="icon-lock"></i></span>
-								<input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="<spring:message code="signup.password_helper.label" />">
+							<span class="add-on"><i class="icon-lock"></i></span> <spring:message code="signup.password_helper.label" var="password_helper" />
+								<form:input path="password" type="Password" id="password" class="input-xlarge" name="password" placeholder="${password_helper}" />
 								<span class="help-inline"><spring:message code="signup.password_required.label" /></span>	
 							</div>
 						</div>
@@ -126,13 +111,13 @@
 				        <label class="control-label"><spring:message code="signup.repassword.label" /></label>
 						<div class="controls">
 						    <div class="input-prepend">
-							<span class="add-on"><i class="icon-lock"></i></span>
-								<input type="Password" id="conpasswd" class="input-xlarge" name="conpasswd" placeholder="<spring:message code="signup.repassword_helper.label" />">
+							<span class="add-on"><i class="icon-lock"></i></span> <spring:message code="signup.repassword_helper.label" var="repassword_helper"/>
+								<form:input path="conpassword" type="Password" id="conpassword" class="input-xlarge" name="conpassword" placeholder="${repassword_helper}" />
 								<span class="help-inline"><spring:message code="signup.repassword_required.label" /></span>	
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="control-group">
 						<label class="control-label" for="input01"></label>
 					      <div class="controls">
@@ -141,7 +126,7 @@
 					
 					</div>
 					
-					<a class="btn btn-primary" href="signup-flow.auth?_eventId=signin"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Ou se connecter</a>
+					<a class="btn btn-primary" href="signin" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);" >Ou se connecter</a>
 					
 				 </fieldset>
 			  </form:form>
@@ -158,19 +143,19 @@
 			
 		   $("#signup").validate({
 				rules:{
-					fname:"required",
-					lname:"required",
+					firstName:"required",
+					lastName:"required",
 					email:{
 							required:true,
 							email: true
 						},
-					passwd:{
+					password:{
 						required:true,
 						minlength: 8
 					},
-					conpasswd:{
+					conpassword:{
 						required:true,
-						equalTo: "#passwd"
+						equalTo: "#password"
 					},
 					gender:"required"
 				},
