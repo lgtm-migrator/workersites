@@ -15,12 +15,13 @@
  */
 package com.baker.social.signup;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.social.connect.UserProfile;
 
-import com.baker.util.Gender;
 
 
 public class SignupForm {
@@ -39,6 +40,7 @@ public class SignupForm {
 	private String firstName;
 	
 	@NotEmpty
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
 	private String maidenname;

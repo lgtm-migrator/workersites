@@ -15,6 +15,7 @@
  */
 package com.baker.social.account;
 
+
 public class Account {
 
 	private final String email;

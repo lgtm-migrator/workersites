@@ -40,7 +40,7 @@
 		      <form:form id="signup" class="form-horizontal" method="post" action="${signupUrl}" modelAttribute="signupForm" >
 			       <fieldset>
 					<legend><spring:message code="signup.title.label" /></legend>	
-				
+					
 					<div class="control-group">
 				        <label class="control-label" for="firstName"><spring:message code="signup.firstname.label" /></label>
 						<div class="controls">
@@ -76,17 +76,15 @@
 						<div class="controls">
 						    <spring:message code="signup.genderM.label" var="genderM"/>
 							<spring:message code="signup.genderF.label" var="genderF"/>
-							
 								<div id="gender" name="gender" class="btn-group" data-toggle="buttons-radio">  
-										<c:forEach var="gender" items="${genders}">
- 											<form:button path="gender" id="${gender}" type="button" value="${gender}" class="btn btn-info">${gender}</form:button>  											
+										<c:forEach var="aGender" items="${gender}">
+											<spring:message code="signup.${aGender}.label" var="aGender_lable" />
+ 											<form:button id="gender" type="button" value="${aGender}" class="btn btn-info">${aGender_lable}</form:button>  											
 										</c:forEach>
-					                    <span class="help-inline"><spring:message code="signup.gender_required.label" /></span>
-					            </div>	
-			               
-							
+					            </div>			     		             
 						</div>
 					</div>
+					<form:input  path="gender" type="hidden" name="gender" value="Male" />
 					<div id="maidengroup" class="control-group hide">
 				        <label class="control-label"><spring:message code="signup.maidenname.label" /></label>
 						<div class="controls">
@@ -140,6 +138,16 @@
         <util:js value="/resources/js/vendor/jquery.validate.js"/>
 <script type="text/javascript">
 	  $(window).ready(function(){
+		  
+		  $("button#gender").click(function() {
+			    
+			    var $value = $(this).val();
+			    
+			    $('input#gender').val($value);
+
+			});
+
+			
 			
 		   $("#signup").validate({
 				rules:{
@@ -183,7 +191,7 @@
 			
 			var hiddenBox = $( "#maidengroup" );
 			$( "#gender button" ).on( "click", function( event ) {
-				if (this.id == "Male") {
+				if (this.value == "Male") {
 					hiddenBox.addClass("hide");
 					$("#maidenname").rules("remove", required);
 					
