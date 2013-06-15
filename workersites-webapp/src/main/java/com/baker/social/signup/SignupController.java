@@ -111,17 +111,22 @@ public class SignupController {
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
+	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request, ModelMap model) {
 		if (formBinding.hasErrors()) {
 			
 			return null;
 		}
-		Validator va = this.validator;
 		Account account = createAccount(form, formBinding);
 		if (account != null) {
 			SignInUtils.signin(account.getEmail());
 			ProviderSignInUtils.handlePostSignUp(account.getEmail(), request);
 			return "redirect:/";
+		} else if (account == null){
+			if (formBinding.hasErrors()) {
+				
+				
+				return "view.signup";
+			}
 		}
 		return null;
 	}

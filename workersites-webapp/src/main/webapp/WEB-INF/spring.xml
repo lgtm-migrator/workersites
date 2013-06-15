@@ -31,7 +31,7 @@
             </list>
         </property>
     </bean>
-    
+     
    <bean id="validator"
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="validationMessageSource" ref="applicationMessageSource" />
@@ -41,9 +41,7 @@
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
          <property name="customEditors">
              <map>
-                 <entry key="java.io.Reader">
-                     <bean class="com.baker.util.ServletContextResourceReaderPropertyEditor" />
-                 </entry>
+                 <entry key="java.io.Reader" value="com.baker.util.ServletContextResourceReaderPropertyEditor" />                  
              </map>
          </property>
      </bean>

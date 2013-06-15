@@ -8,11 +8,10 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="util" tagdir="/WEB-INF/tags/util" %>
 <%@ taglib prefix="tb" uri="/WEB-INF/taglib/taglib.tld" %>
-
 <util:js value="/resources/js/pages/home.js" />
 
 <h1>Subscription page</h1>
-<p>Welcome to registration page.<br> All you get is this message and a barebones HTML document.</p>
+<security:authorize access="isAnonymous()">
 
 <c:url value="/signup" var="signupUrl" />
 <c:if test="${not empty message}">
@@ -40,7 +39,17 @@
 		      <form:form id="signup" class="form-horizontal" method="post" action="${signupUrl}" modelAttribute="signupForm" >
 			       <fieldset>
 					<legend><spring:message code="signup.title.label" /></legend>	
-					
+					<spring:bind path="*">
+						<c:choose>
+							<c:when test="${status.error}">
+							
+								<div class="alert alert-error" >
+									<div class="error"><spring:message code="signup.error.label" /> </div>
+								</div>
+							
+							</c:when>
+						</c:choose>                     
+					</spring:bind>
 					<div class="control-group">
 				        <label class="control-label" for="firstName"><spring:message code="signup.firstname.label" /></label>
 						<div class="controls">
@@ -191,12 +200,12 @@
 			
 			var hiddenBox = $( "#maidengroup" );
 			$( "#gender button" ).on( "click", function( event ) {
-				if (this.value == "Male") {
+				if (this.value == "Male" && !(hiddenBox.hasClass('hide'))) {
 					hiddenBox.addClass("hide");
 					$("#maidenname").rules("remove", required);
 					
 					//$("#maidenname").removeAttr("required");
-				} else {
+				} else if (this.value == "Female" && hiddenBox.hasClass('hide')) {
 					hiddenBox.removeClass("hide");
 					$("#maidenname").rules("add", {
 						required: true
@@ -209,3 +218,27 @@
 			});
 		});
 </script>
+
+</security:authorize>
+
+<security:authorize access="isAuthenticated()">
+
+<div class="container">
+	<div class="row.fluid">
+		<div class="span11">
+			<div class="well"> 
+				<div class="alert alert-error" >
+						<div class="error"><spring:message code="signup.already.label" /></div>
+				</div>
+			</div>
+		</div>
+		<div class="span11">
+			<div class="well"> 
+				<a class="btn btn-primary" href="logout" onclick="_gaq.push(['_trackEvent', 'Signup', 'Already registered', 'Sign out proposition']);" >Sign out</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+</security:authorize>
+
