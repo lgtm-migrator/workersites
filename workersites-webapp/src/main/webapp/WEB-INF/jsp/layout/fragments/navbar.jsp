@@ -67,16 +67,16 @@
 						    </ul>
 					    </div>
 				    </li>
-				    <c:set var="displayName">
+                </ul>
+            </div> <!--/.nav-collapse -->
+            <c:set var="displayName">
 					    <security:authorize access="isAuthenticated()">
 					        <security:authentication htmlEscape="false" property="principal.username" />
 					    </security:authorize>
 					</c:set>
-					<li>        
-                    	<img src="<gravatar:image email="${displayName}" size="32"/>" alt="Gravatar" title="Gravatar"/>
-                    </li>
-                </ul>
-            </div> <!--/.nav-collapse -->
+                <a class="brand" href="#">
+					<img class="media-object" src="<gravatar:image email="${displayName}" size="32"/>" alt="Gravatar" title="Gravatar" data-src="holder.js/64x64" />
+				</a>  
         </div>
     </div>
 </div>
