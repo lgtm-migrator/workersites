@@ -15,9 +15,13 @@
  */
 package com.baker.social.signup;
 
+import java.security.Principal;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 
@@ -26,6 +30,7 @@ import com.baker.social.account.AccountRepository;
 import com.baker.social.account.UsernameAlreadyInUseException;
 import com.baker.social.message.Message;
 import com.baker.social.message.MessageType;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -86,6 +91,10 @@ public class SignupController {
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public ModelAndView signupForm(WebRequest request) {
 		Connection<?> connection = ProviderSignInUtils.getConnection(request);
+		
+		if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser"))  {
+			 return new ModelAndView("view.home");
+		}
 		
 		if (connection != null) {
 			

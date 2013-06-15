@@ -6,6 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="gravatar" uri="http://www.paalgyula.hu/schemas/tld/gravatar" %>
 <%@ taglib prefix="util" tagdir="/WEB-INF/tags/util" %>
 <%@ taglib prefix="tb" uri="/WEB-INF/taglib/taglib.tld" %>
 
@@ -37,6 +38,13 @@
                 </ul>
                 <ul class="nav pull-right">
                     <c:forEach var="item" items="signup,contact,signin">
+                    <security:authorize var="loggedIn" access="isAuthenticated()" />                    
+					<c:if test="${loggedIn && item == 'signup'}">
+					        <c:set var="item" value="logout" />
+					        <c:set var="itemtest" value="merde" />
+					        
+					</c:if>					  
+				
                         <spring:message var="itemTitle" code="navbar.${item}.title" />
                         <c:choose>
                             <c:when test="${item eq selectedView}">
@@ -47,18 +55,26 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    
-                    <div class="btn-group">
-					    <a class="btn dropdown-toggle" data-toggle="dropdown" href="?lang=en">
-					    ${fn:toUpperCase(localeCode)}
-					    <span class="caret"></span>
-					    </a>
-					    <ul class="dropdown-menu">
-					    <li><a tabindex="-1" href="?lang=en">EN</a></li>
-					     <li><a tabindex="-1" href="?lang=fr">FR</a></li>					
-					    </ul>
-				    </div>
-                    
+                    <li>
+	                    <div class="btn-group">
+						    <a class="btn dropdown-toggle" data-toggle="dropdown" href="?lang=en">
+						    ${fn:toUpperCase(localeCode)}
+						    <span class="caret"></span>
+						    </a>
+						    <ul class="dropdown-menu">
+						    <li><a tabindex="-1" href="?lang=en">EN</a></li>
+						     <li><a tabindex="-1" href="?lang=fr">FR</a></li>					
+						    </ul>
+					    </div>
+				    </li>
+				    <c:set var="displayName">
+					    <security:authorize access="isAuthenticated()">
+					        <security:authentication htmlEscape="false" property="principal.username" />
+					    </security:authorize>
+					</c:set>
+					<li>        
+                    	<img src="<gravatar:image email="${displayName}" size="32"/>" alt="Gravatar" title="Gravatar"/>
+                    </li>
                 </ul>
             </div> <!--/.nav-collapse -->
         </div>

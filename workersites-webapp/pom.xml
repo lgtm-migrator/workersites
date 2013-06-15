@@ -103,12 +103,22 @@
 		    <version>${junit.version}</version>
 		    <scope>test</scope>
 		</dependency>
-			<!--  WebFlow -->
+			<!--  WebFlow 
 			<dependency>
 			    <groupId>org.springframework.webflow</groupId>
 			    <artifactId>spring-webflow</artifactId>
 			    <version>${spring-webflow.version}</version>
 			</dependency> 
+			-->
+		<!--  Gravatar -->
+			 <dependency>
+            <groupId>hu.paalgyula</groupId>
+            <artifactId>gravatar-taglib</artifactId>
+            <version>0.1.4</version>
+            <type>jar</type>
+        </dependency>
+        
+        
 		<!-- db unit -->
 		<dependency>
 		    <groupId>org.dbunit</groupId>
