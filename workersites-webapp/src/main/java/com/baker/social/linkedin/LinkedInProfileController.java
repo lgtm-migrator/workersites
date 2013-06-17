@@ -43,4 +43,10 @@ public class LinkedInProfileController {
 		return "linkedin/profile";
 	}
 	
+	@RequestMapping(value="/auth/linkedin", params="error=invalid_request")
+	public String error(Principal currentUser, Model model) {
+		return null;
+		
+	}
+	
 }

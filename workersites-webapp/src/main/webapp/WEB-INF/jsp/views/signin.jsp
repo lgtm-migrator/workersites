@@ -23,11 +23,6 @@
 <h1><spring:message code="signin.title.label" /></h1>
 <p>Welcome to sign in page.<br> All you get is this message and a barebones HTML document.</p>
 
-<div class="container">
-<div class="alert" >flowExecutionKey: ${flowExecutionKey} <br/>
-eventId: ${eventId}
- </div>
-
 <div class="row.fluid">
 	<div class="span11">
 		<div class="well"> 
@@ -36,7 +31,7 @@ eventId: ${eventId}
 			    <a class="btn btn-primary" href="<c:url value="/auth/facebook"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By Facebook']);">Facebook</a>
 			    <a class="btn btn-primary" href="<c:url value="/auth/twitter"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By Twitter']);">Twitter</a>			    
 			    <a class="btn btn-primary" href="<c:url value="/auth/google"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By Google']);">Google</a>   
-			    <a class="btn btn-primary" href="<c:url value="/auth/linkedin"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By LinkedIn']);">LinkedIn</a>   
+			    <a class="btn btn-primary" href="<c:url value="/connect/linkedin"/>" onclick="_gaq.push(['_trackEvent', 'Signin', 'Signin page', 'By LinkedIn']);">LinkedIn</a>   
 			    
 			</div>
 		</div> 

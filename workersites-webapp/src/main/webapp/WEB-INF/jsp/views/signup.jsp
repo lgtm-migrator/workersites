@@ -141,7 +141,7 @@
 		   </div>
 	   </div>
 	 </div>
-</div>
+
 
         <util:js value="/resources/js/vendor/jquery-1.9.1.js"/>
         <util:js value="/resources/js/vendor/jquery.validate.js"/>

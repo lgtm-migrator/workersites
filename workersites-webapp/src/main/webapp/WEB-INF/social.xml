@@ -17,7 +17,7 @@
 
  	<!-- <context:property-placeholder location="/WEB-INF/application.properties" /> -->  
 
-	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="socialshowcase" />
+	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="immoetmoi" />
 	<twitter:config app-id="${twitter.consumerKey}" app-secret="${twitter.consumerSecret}"/>
 	<linkedin:config app-id="${linkedin.consumerKey}" app-secret="${linkedin.consumerSecret}"/>
 
