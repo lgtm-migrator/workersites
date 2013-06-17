@@ -16,13 +16,18 @@
 package com.baker.social.signup;
 
 import java.security.Principal;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.tiles.request.ApplicationContext;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 
 import com.baker.social.account.Account;
@@ -43,13 +48,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.baker.social.signin.SignInUtils;
 import com.baker.util.validator.SignupFormValidator;
 
 @Controller
-public class SignupController {
+public class SignupController implements MessageSourceAware {
 
+	private MessageSource messageSource;
 	private final AccountRepository accountRepository;
 
 	private Validator validator;
@@ -97,8 +104,8 @@ public class SignupController {
 		}
 		
 		if (connection != null) {
-			
-			request.setAttribute("message", new Message(MessageType.INFO, "Your " + StringUtils.capitalize(connection.getKey().getProviderId()) + " account is not associated with a Spring Social Showcase account. If you're new, please sign up."), WebRequest.SCOPE_REQUEST);
+			UserProfile p = connection.fetchUserProfile();
+			request.setAttribute("message", new Message(MessageType.INFO, messageSource.getMessage("signup.your.label", null, request.getLocale()) + " " + StringUtils.capitalize(connection.getKey().getProviderId()) + " " + messageSource.getMessage("signup.accountnotassoc.label", null, request.getLocale()) + " "  +  messageSource.getMessage("project.name", null, request.getLocale()) +  " "  +  messageSource.getMessage("signup.plzsignup.label", null, request.getLocale())), WebRequest.SCOPE_REQUEST);
 			ModelAndView mv = new ModelAndView("view.signup", "signupForm", SignupForm.fromProviderUser(connection.fetchUserProfile()));
 			ModelMap m = mv.getModelMap();
 			if (!m.containsAttribute("gender"))
@@ -151,6 +158,12 @@ public class SignupController {
 			formBinding.rejectValue("email", "user.duplicateUsername", "already in use");
 			return null;
 		}
+	}
+
+	@Override
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
+		
 	}
 
 	
