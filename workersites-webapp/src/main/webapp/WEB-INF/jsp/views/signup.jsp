@@ -26,11 +26,23 @@
 	<div class="span11">
 		<div class="well"> 
 		<legend><spring:message code="signup.registerwith.label" /></legend>
-			<div class="btn-group">		    
-			    <a class="btn btn-primary" href="<c:url value="/auth/facebook"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Facebook</a>
-			    <a class="btn btn-primary" href="<c:url value="/auth/twitter"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Twitter</a>			    
-			    <a class="btn btn-primary" href="<c:url value="/auth/google"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Google</a>   
-			    <a class="btn btn-primary" href="<c:url value="/auth/linkedin"/>" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">LinkedIn</a>   
+			<form id="submit_facebook" action="<c:url value="/auth/facebook" />" method="POST">
+				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access,email" />
+	    	</form>
+	    	<form id="submit_twitter" action="<c:url value="/auth/twitter" />" method="POST">
+				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access,email" />
+	    	</form>
+	    	<form id="submit_google" action="<c:url value="/auth/google" />" method="POST">
+				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access,email" />
+	    	</form>
+	    	<form id="submit_linkedin" action="<c:url value="/auth/linkedin" />" method="POST">
+				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access,email" />
+	    	</form>
+			<div class="btn-group">		
+			    <a class="btn btn-primary" id="idFacebook" href="#" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Facebook</a>
+			    <a class="btn btn-primary" id="idTwitter" href="#" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Twitter</a>			    
+			    <a class="btn btn-primary" id="idGoogle" href="#" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">Google</a>   
+			    <a class="btn btn-primary" id="idLinkedIn" href="#" onclick="_gaq.push(['_trackEvent', 'Signup', 'Registering', 'By Facebook']);">LinkedIn</a>   
 			</div>
 		</div> 
 	</div>
@@ -148,6 +160,39 @@
 <script type="text/javascript">
 	  $(window).ready(function(){
 		  
+		  
+		  $("#submit_facebook").submit(function(){
+		        alert($("scope").val());
+		    });
+		    $("#idFacebook").click(function(){
+		        $("#submit_facebook").submit();
+		        return false;
+		    });
+		    
+		    $("#submit_twitter").submit(function(){
+		        alert($("scope").val());
+		    });
+		    $("#idTwitter").click(function(){
+		        $("#submit_twitter").submit();
+		        return false;
+		    });
+		    
+		    $("#submit_google").submit(function(){
+		        alert($("scope").val());
+		    });
+		    $("#idGoogle").click(function(){
+		        $("#submit_google").submit();
+		        return false;
+		    });
+		    
+		    $("#submit_linkedin").submit(function(){
+		        alert($("scope").val());
+		    });
+		    $("#idLinkedin").click(function(){
+		        $("#submit_linkedin").submit();
+		        return false;
+		    });
+		    
 		  $("button#gender").click(function() {
 			    
 			    var $value = $(this).val();

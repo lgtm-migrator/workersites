@@ -107,12 +107,6 @@ public class SignupController implements MessageSourceAware {
 		}
 		
 		if (connection != null) {
-			Facebook facebook = (Facebook) (connection != null ? connection.getApi() : new FacebookTemplate());		//Object test = connection.getApi();
-			PagedList<String> list =  facebook.userOperations().getUserPermissions();
-			
-			UserProfile p = connection.fetchUserProfile();
-			
-			
 			request.setAttribute("message", new Message(MessageType.INFO, messageSource.getMessage("signup.your.label", null, request.getLocale()) + " " + StringUtils.capitalize(connection.getKey().getProviderId()) + " " + messageSource.getMessage("signup.accountnotassoc.label", null, request.getLocale()) + " "  +  messageSource.getMessage("project.name", null, request.getLocale()) +  " "  +  messageSource.getMessage("signup.plzsignup.label", null, request.getLocale())), WebRequest.SCOPE_REQUEST);
 			ModelAndView mv = new ModelAndView("view.signup", "signupForm", SignupForm.fromProviderUser(connection.fetchUserProfile()));
 			ModelMap m = mv.getModelMap();
