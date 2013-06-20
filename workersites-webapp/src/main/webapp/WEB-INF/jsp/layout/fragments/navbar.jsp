@@ -69,14 +69,13 @@
 				    </li>
                 </ul>
             </div> <!--/.nav-collapse -->
-            <c:set var="displayName">
-					    <security:authorize access="isAuthenticated()">
-					        <security:authentication htmlEscape="false" property="principal.username" />
-					    </security:authorize>
-					</c:set>
-                <a class="brand" href="#">
-					<img class="media-object" src="<gravatar:image email="${displayName}" size="32"/>" alt="Gravatar" title="Gravatar" data-src="holder.js/64x64" />
-				</a>  
+			<c:if  test="${not empty username}">
+				    <a class="brand" href="#">
+						<img class="media-object" src="<gravatar:image email="${username}" size="32"/>" alt="Gravatar" title="Gravatar" data-src="holder.js/64x64" />
+					</a>  
+			      
+			</c:if>
+               
         </div>
     </div>
 </div>
