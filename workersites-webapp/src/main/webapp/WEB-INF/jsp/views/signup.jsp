@@ -63,7 +63,7 @@
 						</c:choose>                     
 					</spring:bind>
 					<div class="control-group">
-				        <label class="control-label" for="firstName"><spring:message code="signup.firstname.label" /></label>
+				        <form:label class="control-label" path="firstName" for="firstName"><spring:message code="signup.firstname.label" /><form:errors path="firstName" cssClass="error" /></form:label>
 						<div class="controls">
 						    <div class="input-prepend">
 							<span class="add-on"><i class="icon-user"></i></span> <spring:message code="signup.firstname_helper.label" var="firstname_helper" />
@@ -73,7 +73,7 @@
 						</div>
 					</div>
 					<div class="control-group ">
-				        <label class="control-label"><spring:message code="signup.lastname.label" /></label>
+				        <form:label class="control-label" path="lastName"><spring:message code="signup.lastname.label" /><form:errors path="lastName" cssClass="error" /></form:label>
 						<div class="controls">
 						    <div class="input-prepend">
 							<span class="add-on"><i class="icon-user"></i></span> <spring:message code="signup.lastname_helper.label" var="lastname_helper" />
@@ -83,17 +83,17 @@
 						</div>
 					</div>
 					<div class="control-group">
-				        <label class="control-label"><spring:message code="signup.email.label" /></label>
+				        <form:label class="control-label" path="email"><spring:message code="signup.email.label" /></form:label>
 						<div class="controls">
 						    <div class="input-prepend">
 							<span class="add-on"><i class="icon-envelope"></i></span> <spring:message code="signup.email_helper.label" var="email_helper" />
 								<form:input path="email" type="text" class="input-xlarge" id="email" name="email" placeholder="${email_helper}" />
-								<span class="help-inline"><spring:message code="signup.email_required.label" /></span>	
+								<form:errors path="email" cssClass="error help-inline" />
 							</div>
 						</div>	
 					</div>
 					<div class="control-group">
-				        <label class="control-label"><spring:message code="signup.gender.label" /></label>
+				        <form:label class="control-label" path="gender"><spring:message code="signup.gender.label" /><form:errors path="gender" cssClass="error" /></form:label>
 						<div class="controls">
 						    <spring:message code="signup.genderM.label" var="genderM"/>
 							<spring:message code="signup.genderF.label" var="genderF"/>
@@ -107,7 +107,7 @@
 					</div>
 					<form:input  path="gender" type="hidden" name="gender" value="Male" />
 					<div id="maidengroup" class="control-group hide">
-				        <label class="control-label"><spring:message code="signup.maidenname.label" /></label>
+				        <form:label class="control-label" path="maidenname"><spring:message code="signup.maidenname.label" /><form:errors path="maidenname" cssClass="error" /></form:label>
 						<div class="controls">
 						    <div class="input-prepend">
 							<span class="add-on"><i class="icon-user"></i></span> <spring:message code="signup.maidenname_helper.label" var="maidenname_helper" />
@@ -117,7 +117,7 @@
 						</div>
 					</div>
 					<div class="control-group">
-				        <label class="control-label"><spring:message code="signup.password.label" /></label>
+				        <form:label class="control-label" path="password"><spring:message code="signup.password.label" /><form:errors path="password" cssClass="error" /></form:label>
 						<div class="controls">
 						    <div class="input-prepend">
 							<span class="add-on"><i class="icon-lock"></i></span> <spring:message code="signup.password_helper.label" var="password_helper" />
@@ -127,7 +127,7 @@
 						</div>
 					</div>
 					<div class="control-group">
-				        <label class="control-label"><spring:message code="signup.repassword.label" /></label>
+				        <form:label class="control-label" path="conpassword"><spring:message code="signup.repassword.label" /><form:errors path="conpassword" cssClass="error" /></form:label>
 						<div class="controls">
 						    <div class="input-prepend">
 							<span class="add-on"><i class="icon-lock"></i></span> <spring:message code="signup.repassword_helper.label" var="repassword_helper"/>
@@ -159,35 +159,23 @@
         <util:js value="/resources/js/vendor/jquery.validate.js"/>
 <script type="text/javascript">
 	  $(window).ready(function(){
-		  
-		  
-		  $("#submit_facebook").submit(function(){
-		        alert($("scope").val());
-		    });
+		  		 
 		    $("#idFacebook").click(function(){
 		        $("#submit_facebook").submit();
 		        return false;
 		    });
 		    
-		    $("#submit_twitter").submit(function(){
-		        alert($("scope").val());
-		    });
+		  
 		    $("#idTwitter").click(function(){
 		        $("#submit_twitter").submit();
 		        return false;
 		    });
-		    
-		    $("#submit_google").submit(function(){
-		        alert($("scope").val());
-		    });
+		    		  
 		    $("#idGoogle").click(function(){
 		        $("#submit_google").submit();
 		        return false;
 		    });
-		    
-		    $("#submit_linkedin").submit(function(){
-		        alert($("scope").val());
-		    });
+		    	  
 		    $("#idLinkedin").click(function(){
 		        $("#submit_linkedin").submit();
 		        return false;
@@ -203,7 +191,7 @@
 
 			
 			
-		   $("#signup").validate({
+		  $("#signup").validate({
 				rules:{
 					firstName:"required",
 					lastName:"required",
@@ -230,6 +218,8 @@
 				        this.findByName(element.name).parent("div").parent("div").removeClass(validClass).addClass(errorClass);
 				    } else {
 				        $(element).parent("div").parent("div").parent("div").removeClass(validClass).addClass(errorClass);
+				        $(element).attr("placeholder", "<spring:message code="signup.required.label" />");
+
 				        
 				    }
 				  },
@@ -242,7 +232,18 @@
 				  }
 
 			});
-			
+		 
+		  
+		  	if ($(".error.help-inline").length > 0){
+			  $("input#email").popover({
+			      placement : 'top', //placement of the popover. also can use top, bottom, left or right
+			      title : '<spring:message code="signup.required.label" />', //this is the top title bar of the popover. add some basic css
+			      html: 'true', //needed to show html of course
+			      content :  '&nbsp;&nbsp;' + $(".error.help-inline").text() + '&nbsp;&nbsp;' //this is the content of the html box. add the image here or anything you want really.
+			});
+			  $("input#email").click();
+			}
+		 
 			var hiddenBox = $( "#maidengroup" );
 			$( "#gender button" ).on( "click", function( event ) {
 				if (this.value == "Male" && !(hiddenBox.hasClass('hide'))) {
