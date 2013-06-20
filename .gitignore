@@ -7,6 +7,9 @@
 
 target/
 
+.euml2
+.umlproject
+
 *.pbxuser
 *.perspective
 *.perspectivev3
