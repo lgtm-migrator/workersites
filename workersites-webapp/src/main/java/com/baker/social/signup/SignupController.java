@@ -24,8 +24,10 @@ import org.springframework.context.MessageSourceAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import com.baker.social.account.Compte;
+
+import com.baker.social.account.DefaultProfil;
 import com.baker.social.account.AccountRepository;
+import com.baker.social.account.Profil;
 import com.baker.social.account.UsernameAlreadyInUseException;
 import com.baker.social.message.Message;
 import com.baker.social.message.MessageType;
@@ -42,6 +44,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.baker.social.signin.SignInUtils;
 import com.baker.util.validator.SignupFormValidator;
 
@@ -140,7 +143,7 @@ public class SignupController implements MessageSourceAware {
 			
 			return null;
 		}
-		Compte account = createAccount(form, formBinding);
+		Profil account = createAccount(form, formBinding);
 		if (account != null) {
 			SignInUtils.signin(account.getEmail());
 			ProviderSignInUtils.handlePostSignUp(account.getEmail(), request);
@@ -159,9 +162,9 @@ public class SignupController implements MessageSourceAware {
 
 	// internal helpers
 	
-	private Compte createAccount(SignupForm form, BindingResult formBinding) {
+	private Profil createAccount(SignupForm form, BindingResult formBinding) {
 		try {
-			Compte account = new Compte(form.getEmail(), form.getPassword(), form.getFirstName(), form.getLastName(), form.getGender().name(), form.getMaidenname());
+			Profil account = new DefaultProfil(form.getEmail(), form.getPassword(), form.getFirstName(), form.getLastName(), form.getGender().name(), form.getMaidenname());
 			accountRepository.createAccount(account);
 			return account;
 		} catch (UsernameAlreadyInUseException e) {

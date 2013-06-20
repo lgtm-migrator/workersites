@@ -16,7 +16,7 @@
 package com.baker.social.account;
 
 
-public class Compte {
+public class DefaultProfil implements Profil {
 
 	/**
 	 * @uml.property  name="email"
@@ -48,7 +48,7 @@ public class Compte {
 	 */
 	private final String lastName;
 
-	public Compte(String email, String password, String firstName, String lastName, String gender, String maidenname) {
+	public DefaultProfil(String email, String password, String firstName, String lastName, String gender, String maidenname) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
@@ -100,6 +100,8 @@ public class Compte {
 	public String getEmail() {
 		return email;
 	}
+
+	
 
 	
 }

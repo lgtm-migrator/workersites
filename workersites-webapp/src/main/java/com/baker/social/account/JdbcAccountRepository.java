@@ -51,7 +51,7 @@ public class JdbcAccountRepository implements AccountRepository {
 	}
 
 	@Transactional
-	public void createAccount(Compte user) throws UsernameAlreadyInUseException {
+	public void createAccount(Profil user) throws UsernameAlreadyInUseException {
 		try {
 			jdbcTemplate.update(
 					"insert into Account (email, password, firstName, lastName, gender, maidenname) values (?, ?, ?, ?, ?, ?)",
@@ -62,11 +62,11 @@ public class JdbcAccountRepository implements AccountRepository {
 		}
 	}
 
-	public Compte findAccountByUsername(String email) {
+	public DefaultProfil findAccountByUsername(String email) {
 		return jdbcTemplate.queryForObject("select email, firstName, lastName from Account where email = ?",
-				new RowMapper<Compte>() {
-					public Compte mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return new Compte(rs.getString("email"), null, rs.getString("fistName"), rs
+				new RowMapper<DefaultProfil>() {
+					public DefaultProfil mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return new DefaultProfil(rs.getString("email"), null, rs.getString("fistName"), rs
 								.getString("lastName"), rs.getString("gender"), rs.getString("maindenname"));
 					}
 				}, email);
