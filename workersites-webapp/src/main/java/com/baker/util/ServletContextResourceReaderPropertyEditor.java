@@ -11,6 +11,10 @@ import java.io.InputStreamReader;
 
 public class ServletContextResourceReaderPropertyEditor extends PropertyEditorSupport implements ServletContextAware {
 
+    /**
+	 * @uml.property  name="servletContext"
+	 * @uml.associationEnd  
+	 */
     private ServletContext servletContext;
 
 	@Override
@@ -31,6 +35,10 @@ public class ServletContextResourceReaderPropertyEditor extends PropertyEditorSu
         throw new UnsupportedOperationException("Not implemented");
     }
 
+    /**
+	 * @param servletContext
+	 * @uml.property  name="servletContext"
+	 */
     @Override
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;

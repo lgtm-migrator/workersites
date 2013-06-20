@@ -17,22 +17,44 @@ package com.baker.social.twitter;
 
 public class MessageForm {
 	
+	/**
+	 * @uml.property  name="to"
+	 */
 	private String to;
 	
+	/**
+	 * @uml.property  name="text"
+	 */
 	private String text;
 
+	/**
+	 * @return
+	 * @uml.property  name="to"
+	 */
 	public String getTo() {
 		return to;
 	}
 
+	/**
+	 * @param to
+	 * @uml.property  name="to"
+	 */
 	public void setTo(String to) {
 		this.to = to;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="text"
+	 */
 	public String getText() {
 		return text;
 	}
 
+	/**
+	 * @param text
+	 * @uml.property  name="text"
+	 */
 	public void setText(String text) {
 		this.text = text;
 	}

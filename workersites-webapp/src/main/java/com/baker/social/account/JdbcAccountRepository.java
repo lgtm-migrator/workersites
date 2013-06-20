@@ -30,8 +30,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class JdbcAccountRepository implements AccountRepository {
 
+	/**
+	 * @uml.property  name="jdbcTemplate"
+	 * @uml.associationEnd  
+	 */
 	private  JdbcTemplate jdbcTemplate;
 
+	/**
+	 * @uml.property  name="passwordEncoder"
+	 * @uml.associationEnd  
+	 */
 	private  PasswordEncoder passwordEncoder;
 	
 	JdbcAccountRepository() {}
@@ -43,7 +51,7 @@ public class JdbcAccountRepository implements AccountRepository {
 	}
 
 	@Transactional
-	public void createAccount(Account user) throws UsernameAlreadyInUseException {
+	public void createAccount(Compte user) throws UsernameAlreadyInUseException {
 		try {
 			jdbcTemplate.update(
 					"insert into Account (email, password, firstName, lastName, gender, maidenname) values (?, ?, ?, ?, ?, ?)",
@@ -54,11 +62,11 @@ public class JdbcAccountRepository implements AccountRepository {
 		}
 	}
 
-	public Account findAccountByUsername(String email) {
+	public Compte findAccountByUsername(String email) {
 		return jdbcTemplate.queryForObject("select email, firstName, lastName from Account where email = ?",
-				new RowMapper<Account>() {
-					public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return new Account(rs.getString("email"), null, rs.getString("fistName"), rs
+				new RowMapper<Compte>() {
+					public Compte mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return new Compte(rs.getString("email"), null, rs.getString("fistName"), rs
 								.getString("lastName"), rs.getString("gender"), rs.getString("maindenname"));
 					}
 				}, email);

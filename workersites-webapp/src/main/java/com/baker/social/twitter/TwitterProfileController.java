@@ -30,6 +30,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterProfileController {
 
+	/**
+	 * @uml.property  name="connectionRepository"
+	 * @uml.associationEnd  readOnly="true" multiplicity="(0 -1)" elementType="org.springframework.social.twitter.api.Twitter"
+	 */
 	@Inject
 	private ConnectionRepository connectionRepository;
 	

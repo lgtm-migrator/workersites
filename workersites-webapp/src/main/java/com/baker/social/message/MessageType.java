@@ -42,6 +42,9 @@ public enum MessageType {
 	 */
 	ERROR;
 	
+	/**
+	 * @uml.property  name="cssClass"
+	 */
 	private final String cssClass;
 	
 	private MessageType() {
@@ -50,6 +53,7 @@ public enum MessageType {
 	
 	/**
 	 * The css class for styling messages of this type.
+	 * @uml.property  name="cssClass"
 	 */
 	public String getCssClass() {
 		return cssClass;

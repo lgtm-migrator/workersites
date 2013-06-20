@@ -22,8 +22,15 @@ package com.baker.social.message;
  */
 public final class Message {
 	
+	/**
+	 * @uml.property  name="type"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final MessageType type;
 	
+	/**
+	 * @uml.property  name="text"
+	 */
 	private final String text;
 
 	/**
@@ -36,6 +43,7 @@ public final class Message {
 
 	/**
 	 * The type of message; such as info, warning, error, or success.
+	 * @uml.property  name="type"
 	 */
 	public MessageType getType() {
 		return type;
@@ -43,6 +51,7 @@ public final class Message {
 
 	/**
 	 * The info text.
+	 * @uml.property  name="text"
 	 */
 	public String getText() {
 		return text;

@@ -13,6 +13,10 @@ import java.util.Locale;
 
 public class IFNoneMatchHandlerInterceptor extends HandlerInterceptorAdapter {
 
+    /**
+	 * @uml.property  name="messageSource"
+	 * @uml.associationEnd  readOnly="true"
+	 */
     @Autowired
     private MessageSource messageSource;
     

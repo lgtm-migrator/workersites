@@ -30,6 +30,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LinkedInProfileController {
 
+	/**
+	 * @uml.property  name="connectionRepository"
+	 * @uml.associationEnd  readOnly="true" multiplicity="(0 -1)" elementType="org.springframework.social.linkedin.api.LinkedIn"
+	 */
 	@Inject
 	private ConnectionRepository connectionRepository;
 	

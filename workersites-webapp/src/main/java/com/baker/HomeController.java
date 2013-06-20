@@ -15,8 +15,16 @@ import javax.inject.Provider;
 @Controller
 public class HomeController {
 
+	/**
+	 * @uml.property  name="connectionRepositoryProvider"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.springframework.social.connect.ConnectionRepository"
+	 */
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 	
+	/**
+	 * @uml.property  name="accountRepository"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final AccountRepository accountRepository;
 	
 	@Inject

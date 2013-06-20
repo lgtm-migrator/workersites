@@ -18,21 +18,44 @@ import org.springframework.format.support.FormattingConversionServiceFactoryBean
 
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
+	/**
+	 * @uml.property  name="logger"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	final Logger logger = LoggerFactory.getLogger(ApplicationConversionServiceFactoryBean.class);
 
 	
 	private static final String DEFAULT_DATE_PATTERN = "dd-MM-yyyy";
 
+	/**
+	 * @uml.property  name="dateFormat"
+	 * @uml.associationEnd  
+	 */
 	private DateTimeFormatter dateFormat;
 
+	/**
+	 * @uml.property  name="datePattern"
+	 */
 	private String datePattern = DEFAULT_DATE_PATTERN;
 
+	/**
+	 * @uml.property  name="formatters"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="org.springframework.format.Formatter"
+	 */
 	private Set<Formatter<?>> formatters = new HashSet<Formatter<?>>();
 
+	/**
+	 * @return
+	 * @uml.property  name="datePattern"
+	 */
 	public String getDatePattern() {
 		return datePattern;
 	}
 
+	/**
+	 * @param datePattern
+	 * @uml.property  name="datePattern"
+	 */
 	@Autowired(required=false)
 	public void setDatePattern(String datePattern) {
 		this.datePattern = datePattern;

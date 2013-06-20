@@ -17,8 +17,8 @@ package com.baker.social.account;
 
 public interface AccountRepository {
 	
-	void createAccount(Account account) throws UsernameAlreadyInUseException;
+	void createAccount(Compte account) throws UsernameAlreadyInUseException;
 
-	Account findAccountByUsername(String username);
+	Compte findAccountByUsername(String username);
 	
 }

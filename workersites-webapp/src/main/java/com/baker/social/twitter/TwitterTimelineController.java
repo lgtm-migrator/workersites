@@ -27,6 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TwitterTimelineController {
 
+	/**
+	 * @uml.property  name="twitter"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final Twitter twitter;
 	
 	@Inject

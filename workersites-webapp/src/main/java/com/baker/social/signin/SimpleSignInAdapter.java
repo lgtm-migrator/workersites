@@ -29,6 +29,10 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 public class SimpleSignInAdapter implements SignInAdapter {
 
+	/**
+	 * @uml.property  name="requestCache"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final RequestCache requestCache;
 
 	@Inject

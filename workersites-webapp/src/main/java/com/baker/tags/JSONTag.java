@@ -12,6 +12,9 @@ public class JSONTag extends RequestContextAwareTag {
 	 * 
 	 */
 	private static final long serialVersionUID = -797155473856809091L;
+	/**
+	 * @uml.property  name="val"
+	 */
 	private Object val;
 
     @Override
@@ -26,6 +29,10 @@ public class JSONTag extends RequestContextAwareTag {
         return EVAL_PAGE;
     }
 
+    /**
+	 * @param val
+	 * @uml.property  name="val"
+	 */
     public void setVal(Object val) {
         this.val = val;
     }

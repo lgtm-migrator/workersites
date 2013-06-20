@@ -10,6 +10,10 @@ import org.springframework.social.security.SocialUserDetailsService;
 
 public class SimpleSocialUsersDetailService implements SocialUserDetailsService {
 
+	/**
+	 * @uml.property  name="userDetailsService"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private UserDetailsService userDetailsService;
 
 	public SimpleSocialUsersDetailService(UserDetailsService userDetailsService) {

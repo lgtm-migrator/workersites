@@ -25,16 +25,28 @@ public class ResourcesController {
 
     private static final Logger log = LoggerFactory.getLogger(ResourcesController.class);
 
+    /**
+	 * @uml.property  name="messageSource"
+	 * @uml.associationEnd  readOnly="true"
+	 */
     @Autowired
     @Qualifier("messageSource")
     private ReloadableMessageSource messageSource;
 
+    /**
+	 * @uml.property  name="applicationMessageSource"
+	 * @uml.associationEnd  readOnly="true"
+	 */
     @Autowired
     @Qualifier("applicationMessageSource")
     private ReloadableMessageSource applicationMessageSource;
 
     private static final String VALUE = "$";
 
+    /**
+	 * @uml.property  name="resourcesMap"
+	 * @uml.associationEnd  qualifier="locale:java.util.Locale com.fasterxml.jackson.databind.node.ObjectNode"
+	 */
     private final ConcurrentMap<Locale, ObjectNode> resourcesMap = new ConcurrentHashMap<Locale, ObjectNode>();
 
     @PostConstruct

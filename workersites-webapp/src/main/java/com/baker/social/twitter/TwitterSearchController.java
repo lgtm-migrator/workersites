@@ -27,6 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TwitterSearchController {
 
+	/**
+	 * @uml.property  name="twitter"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final Twitter twitter;
 	
 	@Inject

@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FacebookFriendsController {
 
+	/**
+	 * @uml.property  name="facebook"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final Facebook facebook;
 
 	@Inject

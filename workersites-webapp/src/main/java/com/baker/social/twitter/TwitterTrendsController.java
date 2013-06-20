@@ -29,6 +29,10 @@ public class TwitterTrendsController {
 	// Yahoo Where On Earth ID representing the entire world
 	private static final long WORLDWIDE_WOE = 1L;
 	
+	/**
+	 * @uml.property  name="twitter"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final Twitter twitter;
 
 	@Inject

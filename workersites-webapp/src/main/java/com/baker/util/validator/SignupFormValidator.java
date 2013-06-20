@@ -10,6 +10,10 @@ import com.baker.social.signup.SignupForm;
 @Component("signupFormValidator")
 public class SignupFormValidator implements Validator {
 
+	/**
+	 * @uml.property  name="genderValidator"
+	 * @uml.associationEnd  
+	 */
 	private GenderValidator genderValidator;
 	
 	@Override
@@ -37,10 +41,18 @@ public class SignupFormValidator implements Validator {
 		
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="genderValidator"
+	 */
 	public GenderValidator getGenderValidator() {
 		return genderValidator;
 	}
 
+	/**
+	 * @param genderValidator
+	 * @uml.property  name="genderValidator"
+	 */
 	public void setGenderValidator(GenderValidator genderValidator) {
 		this.genderValidator = genderValidator;
 	}

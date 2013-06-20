@@ -28,6 +28,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FacebookProfileController {
 	
+	/**
+	 * @uml.property  name="connectionRepository"
+	 * @uml.associationEnd  readOnly="true" multiplicity="(0 -1)" elementType="org.springframework.social.facebook.api.Facebook"
+	 */
 	@Inject
 	private ConnectionRepository connectionRepository;
 

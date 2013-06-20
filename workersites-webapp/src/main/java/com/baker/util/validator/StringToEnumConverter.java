@@ -5,6 +5,9 @@ import org.springframework.core.convert.converter.Converter;
 @SuppressWarnings("rawtypes")
 final class StringToEnumConverter implements Converter<String, Enum> {
 
+	/**
+	 * @uml.property  name="enumType"
+	 */
 	private Class<Enum> enumType;
 
 	/**

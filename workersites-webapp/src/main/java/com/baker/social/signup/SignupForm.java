@@ -27,60 +27,108 @@ import org.springframework.social.connect.UserProfile;
 public class SignupForm {
 
 
+	/**
+	 * @uml.property  name="email"
+	 */
 	@NotEmpty
 	private String email;
 
+	/**
+	 * @uml.property  name="password"
+	 */
 	@Size(min = 8, message = "must be at least 8 characters")
 	private String password;
 	
+	/**
+	 * @uml.property  name="conpassword"
+	 */
 	@Size(min = 8, message = "must be at least 8 characters")
 	private String conpassword;
 
+	/**
+	 * @uml.property  name="firstName"
+	 */
 	@NotEmpty
 	private String firstName;
 	
+	/**
+	 * @uml.property  name="gender"
+	 * @uml.associationEnd  
+	 */
 	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
+	/**
+	 * @uml.property  name="maidenname"
+	 */
 	private String maidenname;
 
+	/**
+	 * @uml.property  name="lastName"
+	 */
 	@NotEmpty
 	private String lastName;
 
+	/**
+	 * @return
+	 * @uml.property  name="email"
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email
+	 * @uml.property  name="email"
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="gender"
+	 */
 	public Gender getGender() {
 		return gender;
 	}
 
+	/**
+	 * @param gender
+	 * @uml.property  name="gender"
+	 */
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="password"
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * @param password
+	 * @uml.property  name="password"
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * @return the conpassword
+	 * @return  the conpassword
+	 * @uml.property  name="conpassword"
 	 */
 	public String getConpassword() {
 		return conpassword;
 	}
 
 	/**
-	 * @param conpassword the conpassword to set
+	 * @param conpassword  the conpassword to set
+	 * @uml.property  name="conpassword"
 	 */
 	public void setConpassword(String conpassword) {
 		this.conpassword = conpassword;
@@ -95,37 +143,49 @@ public class SignupForm {
 	}
 
 	/**
-	 * @return the firstName
+	 * @return  the firstName
+	 * @uml.property  name="firstName"
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
-	 * @param firstName the firstName to set
+	 * @param firstName  the firstName to set
+	 * @uml.property  name="firstName"
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	/**
-	 * @return the lastName
+	 * @return  the lastName
+	 * @uml.property  name="lastName"
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastName  the lastName to set
+	 * @uml.property  name="lastName"
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="maidenname"
+	 */
 	public String getMaidenname() {
 		return maidenname;
 	}
 
+	/**
+	 * @param maidenname
+	 * @uml.property  name="maidenname"
+	 */
 	public void setMaidenname(String maidenname) {
 		this.maidenname = maidenname;
 	}

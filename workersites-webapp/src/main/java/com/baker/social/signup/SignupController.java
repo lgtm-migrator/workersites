@@ -15,25 +15,16 @@
  */
 package com.baker.social.signup;
 
-import java.security.Principal;
-import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.tiles.request.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
-
-import com.baker.social.account.Account;
+import com.baker.social.account.Compte;
 import com.baker.social.account.AccountRepository;
 import com.baker.social.account.UsernameAlreadyInUseException;
 import com.baker.social.message.Message;
@@ -51,17 +42,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.RequestContextUtils;
-
 import com.baker.social.signin.SignInUtils;
 import com.baker.util.validator.SignupFormValidator;
 
 @Controller
 public class SignupController implements MessageSourceAware {
 
+	/**
+	 * @uml.property  name="messageSource"
+	 * @uml.associationEnd  
+	 */
 	private MessageSource messageSource;
+	/**
+	 * @uml.property  name="accountRepository"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private final AccountRepository accountRepository;
 
+	/**
+	 * @uml.property  name="validator"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private Validator validator;
 	
 	@Inject
@@ -78,6 +79,10 @@ public class SignupController implements MessageSourceAware {
 		
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="validator"
+	 */
 	public Validator getValidator() {
 		return validator;
 	}
@@ -85,7 +90,8 @@ public class SignupController implements MessageSourceAware {
 	
 	
 	/**
-	 * @param validator the validator to set
+	 * @param validator  the validator to set
+	 * @uml.property  name="validator"
 	 */
 	public void setValidator(Validator validator) {
 		this.validator = validator;
@@ -134,14 +140,16 @@ public class SignupController implements MessageSourceAware {
 			
 			return null;
 		}
-		Account account = createAccount(form, formBinding);
+		Compte account = createAccount(form, formBinding);
 		if (account != null) {
 			SignInUtils.signin(account.getEmail());
 			ProviderSignInUtils.handlePostSignUp(account.getEmail(), request);
 			return "redirect:/";
 		} else if (account == null){
 			if (formBinding.hasErrors()) {
-				
+				//formBinding.rejectValue("email","email identique");
+				if (!model.containsAttribute("gender"))
+					model.addAttribute("gender", Gender.values());
 				
 				return "view.signup";
 			}
@@ -151,9 +159,9 @@ public class SignupController implements MessageSourceAware {
 
 	// internal helpers
 	
-	private Account createAccount(SignupForm form, BindingResult formBinding) {
+	private Compte createAccount(SignupForm form, BindingResult formBinding) {
 		try {
-			Account account = new Account(form.getEmail(), form.getPassword(), form.getFirstName(), form.getLastName(), form.getGender().name(), form.getMaidenname());
+			Compte account = new Compte(form.getEmail(), form.getPassword(), form.getFirstName(), form.getLastName(), form.getGender().name(), form.getMaidenname());
 			accountRepository.createAccount(account);
 			return account;
 		} catch (UsernameAlreadyInUseException e) {
@@ -162,6 +170,10 @@ public class SignupController implements MessageSourceAware {
 		}
 	}
 
+	/**
+	 * @param messageSource
+	 * @uml.property  name="messageSource"
+	 */
 	@Override
 	public void setMessageSource(MessageSource messageSource) {
 		this.messageSource = messageSource;
